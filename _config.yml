@@ -1,7 +1,7 @@
 # Site settings
 title: HandMap
 description: 'HandMap Project Blog'
-url: 'https://HandMap.github.io'
+url: 'https://handmap.github.io'
 baseurl: '/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
