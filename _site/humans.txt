@@ -1,14 +1,14 @@
 /* TEAM */
-Developer & Designer: Josh Gerdes
-Twitter: @joshgerdes
-Site: http://joshgerdes.com
-Location: Minneapolis, MN, USA
+Project Lead: Nathan Glover
+Twitter: @nathangloverAUS
+Site: https://t04glovern.github.io
+Location: Perth, WA, AUS
 						
 /* THANKS */
-Name: Dale Anthony
+Name: Josh Gerdes
 
 /* SITE */
-Last update: 2016/02/10
+Last update: 2016/07/31
 Standards: HTML5, CSS3
 Components: Jekyll
-Software: Sublime Text, Photoshop
+Software: Sublime Text
