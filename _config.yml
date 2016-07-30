@@ -1,0 +1,38 @@
+# Site settings
+title: HandMap
+description: 'HandMap Project Blog'
+url: 'http://HandMap.github.io/'
+# google_analytics: 'UA-XXXXXX-X'
+# disqus_shortname: 'your-disqus-name'
+
+author:
+  name: 'Nathan Glover'
+  email: nathan@glovers.id.au
+  twitter_username: nathangloverAUS
+  facebook_username: glovers.id.au
+  github_username:  t04glovern
+  linkedin_username:  glovernathan
+
+defaults:
+  -
+    scope:
+      path: ''
+      type: 'posts'
+    values:
+        layout: 'post'
+
+# Build settings
+destination: _site
+paginate: 10
+permalink: /:year/:title/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
+
+gems: ['jekyll-paginate']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
