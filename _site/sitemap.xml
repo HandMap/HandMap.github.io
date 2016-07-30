@@ -3,7 +3,7 @@
   
     
     <url>
-      <loc>http://HandMap.github.io//2016/welcome-to-jekyll/</loc>
+      <loc>https://HandMap.github.io/2016/welcome-to-jekyll/</loc>
       
         <lastmod>2016-01-08T23:04:23+08:00</lastmod>
       
@@ -19,24 +19,9 @@
   
     
     <url>
-      <loc>http://HandMap.github.io//categories/</loc>
+      <loc>https://HandMap.github.io/categories/</loc>
       
-        <lastmod>2016-07-31T02:29:14+08:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://HandMap.github.io//feed.xml</loc>
-      
-        <lastmod>2016-07-31T02:29:14+08:00</lastmod>
+        <lastmod>2016-07-31T02:55:00+08:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -49,9 +34,9 @@
   
     
     <url>
-      <loc>http://HandMap.github.io//</loc>
+      <loc>https://HandMap.github.io/feed.xml</loc>
       
-        <lastmod>2016-07-31T02:29:14+08:00</lastmod>
+        <lastmod>2016-07-31T02:55:00+08:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -64,9 +49,24 @@
   
     
     <url>
-      <loc>http://HandMap.github.io//js/main.js</loc>
+      <loc>https://HandMap.github.io/</loc>
       
-        <lastmod>2016-07-31T02:29:14+08:00</lastmod>
+        <lastmod>2016-07-31T02:55:00+08:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://HandMap.github.io/js/main.js</loc>
+      
+        <lastmod>2016-07-31T02:55:00+08:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -81,9 +81,9 @@
   
     
     <url>
-      <loc>http://HandMap.github.io//tags/</loc>
+      <loc>https://HandMap.github.io/tags/</loc>
       
-        <lastmod>2016-07-31T02:29:14+08:00</lastmod>
+        <lastmod>2016-07-31T02:55:00+08:00</lastmod>
       
       
         <changefreq>monthly</changefreq>

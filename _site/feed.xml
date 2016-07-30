@@ -3,10 +3,10 @@
   <channel>
     <title>HandMap</title>
     <description>HandMap Project Blog</description>
-    <link>http://HandMap.github.io//</link>
-    <atom:link href="http://HandMap.github.io//feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 31 Jul 2016 02:29:14 +0800</pubDate>
-    <lastBuildDate>Sun, 31 Jul 2016 02:29:14 +0800</lastBuildDate>
+    <link>https://HandMap.github.io//</link>
+    <atom:link href="https://HandMap.github.io//feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 31 Jul 2016 02:55:00 +0800</pubDate>
+    <lastBuildDate>Sun, 31 Jul 2016 02:55:00 +0800</lastBuildDate>
     <generator>Jekyll v3.0.2</generator>
     
       <item>
@@ -29,8 +29,8 @@
 
 </description>
         <pubDate>Fri, 08 Jan 2016 23:04:23 +0800</pubDate>
-        <link>http://HandMap.github.io//2016/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">http://HandMap.github.io//2016/welcome-to-jekyll/</guid>
+        <link>https://HandMap.github.io//2016/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">https://HandMap.github.io//2016/welcome-to-jekyll/</guid>
         
         <category>jekyll</category>
         
