@@ -21,7 +21,7 @@ Current requirement are as follows:
 
  * Hand Detection
  * Object Detection
- * Hand Mapping based on Object placed on Hand
+ * Hand Mapping based on Object's position on Hand
  * 3D Restructure of Hand model from 2D Images
 
 ## Special Thanks
