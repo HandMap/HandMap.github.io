@@ -1,23 +1,7 @@
-# Halve  [![Donate](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/taylantatli/0usd)
+# About Hand Map
 
-This theme is Jekyll port of [vangeltzo.com](http://vangeltzo.com/) (by [Vangelis Tzortzis](https://github.com/srekoble)).
+Hand Map is a project currently in the research phase by Nathan Glover of Curtin University.
 
-To learn how to install and use this theme check out the [installation guide](http://taylantatli.me/Halve/halve-theme/) for more information.
+You can bookmark this site to follow the design and implementation process carried out as we work towards 3D hand modeling using 2D camera techniques.
 
-If you have a question, find a bug, or just want to say hi, please open an [issue on GitHub](https://github.com/TaylanTatli/Halve/issues/new).
-
-## Preview   
-![screenshot of Halve](/images/halve-home-image.png)
-
-See a [live version of Halve](http://taylantatli.github.io/Halve) hosted on GitHub.
-
-# Credits
-- Original Work: [Vangelis Tzortzis](https://github.com/srekoble)  
-- Sample Posts and some code examples: [Michael Rose](https://github.com/mmistakes/)
-- Images: [Unsplash](https://unsplash.com/) and [Lorem Pixel](http://lorempixel.com)
-
-### Others
-- [Jekyll](http://jekyllrb.com/)
-- [jQuery](http://jquery.com/)
-- [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
-- [FitVids.JS](http://fitvidsjs.com/)
+The goal is to create an accessible way for people living with cerebral palsy to generate their own splint sketch files that could be 3D printed; saving them regular trips to specialised medical centers.
