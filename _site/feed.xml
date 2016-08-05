@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-05T22:43:41+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-06T00:25:14+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Hand Map is the title I’ve given the project I’m currently in the process of implementing for my final year Computer Systems and Networking project with Curtin University.&lt;/p&gt;
 
@@ -23,4 +23,111 @@
 
 &lt;p&gt;Jekyll: &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;https://jekyllrb.com/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Github Pages: &lt;a href=&quot;https://pages.github.com/&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><summary>An introduction and breakdown of what is required for this project to be successful</summary></entry></feed>
+&lt;p&gt;Github Pages: &lt;a href=&quot;https://pages.github.com/&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><summary>An introduction and breakdown of what is required for this project to be successful</summary></entry><entry><title>Getting started with OpenCV</title><link href="https://handmap.github.io/getting-started-with-opencv/" rel="alternate" type="text/html" title="Getting started with OpenCV" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/getting-started-with-opencv</id><content type="html" xml:base="https://handmap.github.io/getting-started-with-opencv/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;I’ve decided to investigate some of the computer vision libaries that are already available that could possibly already do what I need; therefore saying me a lot of time not having to re-invent the wheel.&lt;/p&gt;
+
+&lt;p&gt;I had the idea to look into OpenCV when I noticed a particular repository trending on &lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt; the other day. The repo in question; maintained by &lt;a href=&quot;https://github.com/Shinao&quot;&gt;Raphael Monnerat&lt;/a&gt; was titled &lt;a href=&quot;https://github.com/Shinao/SmartMirror&quot;&gt;SmartMirror&lt;/a&gt; and is designed to turn a two-way mirror into a gesture controlled smart device.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_DisplayMenu_Preview.gif&quot; alt=&quot;Smart Mirror&quot; /&gt;
+
+  &lt;figcaption&gt;Raphael using Smart Mirror&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The potential for me to apply a similar algorithm to the one he was using to my project was almost too obvious, as it looked as though his implementation used some form of Hand Detection/Recognition. He even had a debugging tool packaged with his code that would display the gesture recognition information in real time while testing.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug.png&quot; alt=&quot;Smart Mirror Debug&quot; /&gt;
+
+  &lt;figcaption&gt;Smart Mirror Debug&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;installing-opencv&quot;&gt;Installing OpenCV&lt;/h2&gt;
+
+&lt;p&gt;My first task was to install OpenCV on a system that I could use to test the SmartMirror code. I span up an Ubuntu 16.04.1 instance and ran the following code to setup the latest OpenCV version on the system.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Install pre-requisites&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get update
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get upgrade
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install build-essential
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+&lt;span class=&quot;c&quot;&gt;## Change directory into a working folder&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Documents/
+
+&lt;span class=&quot;c&quot;&gt;## Clone OpenCV repo and build from source&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/opencv/opencv.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv/
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mkdir release
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;release/
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cmake -D &lt;span class=&quot;nv&quot;&gt;CMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;RELEASE -D &lt;span class=&quot;nv&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local ..
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now that I had the latest version of OpenCV installed I needed to make sure it was working. I also decided that my language of choice; particularly during the initial testing phases would be Python.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Change into the OpenCV samples directory&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;~/Documents&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv/samples/python/
+
+&lt;span class=&quot;c&quot;&gt;## Either run each tool separately or use demo.py to list all demos&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;python demo.py 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I had a play around with a number of the built in tools and was very impressed by the level of quality and detailed code each example provided. One of my personal favorites was the ‘edge.py’ example as I felt like it would provide a very good starting point for when I begin writing my hand detection method.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/OpenCV-Edgepy-test.png&quot; alt=&quot;OpenCV Edge Detection&quot; /&gt;
+
+  &lt;figcaption&gt;OpenCV Canny Edge Detection&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;smartmirror-analysis&quot;&gt;SmartMirror Analysis&lt;/h2&gt;
+
+&lt;p&gt;Now that I had OpenCV installed I decided I would attempt to demo the SmartMirror hand detection code to see if it was as good as it looked like it was.&lt;/p&gt;
+
+&lt;p&gt;I started out by cloning the repository using git and locating the ‘test.py’ file mentioned in the repo README.md.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Change into SmartMirror/Motion directory&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/Shinao/SmartMirror.git
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;SmartMirror/Motion
+
+&lt;span class=&quot;c&quot;&gt;## Execute the test.py script&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;python test.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The example was very finicky to get working, The hand detection itself works very well when it isn’t getting confused about the background lighting.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug_Nathan_3slide.png&quot; alt=&quot;SmartMirror Hand Detection&quot; /&gt;
+
+  &lt;figcaption&gt;SmartMirror Hand Detection&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Difficulty assign, the implementing was detecting my palm, and there was even logic in place to handle hand movements (swiping in different directions).&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug_Nathan_gesture.png&quot; alt=&quot;SmartMirror Hand Detection&quot; /&gt;
+
+  &lt;figcaption&gt;SmartMirror Gesture&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;Today was a productive session that really got me thinking about the possibilities that OpenCV has to offer. Now that I know that what I want to achieve is very possible with the OpenCV libraries I believe my next step will be to learn the OpenCV frameworks from scratch. My goal for the next week is to build up a small library myself so that I can begin to understand how other peoples code works without having to guess/hack a solution together.&lt;/p&gt;
+
+&lt;p&gt;I picked up a digital copy of &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt; by Adrian Rosebrock as I’ve had it recommended to me before as a great practical reasource for learning the in’s and out’s of OpenCV.&lt;/p&gt;
+
+&lt;p&gt;Until next time,&lt;/p&gt;
+
+&lt;p&gt;Nathan.&lt;/p&gt;</content><category term="project" /><category term="opencv" /><category term="ubuntu" /><summary>I begin to investigate one of the most popular open source computer vision libraies, OpenCV</summary></entry></feed>
