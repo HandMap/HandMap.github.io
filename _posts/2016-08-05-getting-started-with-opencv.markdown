@@ -11,7 +11,7 @@ tags:
 
 ## Introduction
 
-I've decided to investigate some of the computer vision libaries that are already available that could possibly already do what I need; therefore saying me a lot of time not having to re-invent the wheel.
+I've decided to investigate some of the computer vision libaries that are already available that could possibly already do what I need. This is likely to save me a lot of time not having to re-invent the wheel.
 
 I had the idea to look into OpenCV when I noticed a particular repository trending on [Github](https://github.com/) the other day. The repo in question; maintained by [Raphael Monnerat](https://github.com/Shinao) was titled [SmartMirror](https://github.com/Shinao/SmartMirror) and is designed to turn a two-way mirror into a gesture controlled smart device.
 
