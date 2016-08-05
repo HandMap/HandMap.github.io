@@ -1,7 +1,8 @@
 # Site
-title: Halve
-description: Stylish, Two-Column Jekyll Theme
+title: Hand Map
+description: The Official Hand Map Project Blog
 url: https://handmap.github.io
+#url: http://127.0.0.1:4000
 logo: halve.png                                       # Site logo
 locale: en_US
 
@@ -52,7 +53,7 @@ linkedin:           glovernathan
 #keybase:           username
 #xmpp:              username@server.com
 #hackernews:        username
-behance:           username
+#behance:           username
 
 # Gems
 gems:

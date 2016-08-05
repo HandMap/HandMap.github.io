@@ -1,10 +1,10 @@
 ---
 layout: home
 ---
-# About Theme
+# About Hand Map
 
-This theme is Jekyll port of [vangeltzo.com](http://vangeltzo.com/) (by [Vangelis Tzortzis](https://github.com/srekoble)).
+Hand Map is a project currently in the research phase by Nathan Glover of Curtin University.
 
-To learn how to install and use this theme check out the [installation guide](http://taylantatli.me/Halve/halve-theme/) for more information.
+You can bookmark this site to follow the design and implementation process carried out as we work towards 3D hand modeling using 2D camera techniques.
 
-If you have a question, find a bug, or just want to say hi, please open an [issue on GitHub](https://github.com/TaylanTatli/Halve/issues/new).
+The goal is to create an accessible way for people living with cerebral palsy to generate their own splint sketch files that could be 3D printed, saving them regular trips to specialised medical centers.
