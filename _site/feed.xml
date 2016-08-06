@@ -1,4 +1,352 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-06T00:29:30+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-06T22:14:39+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Exploring OpenCV with Python</title><link href="https://handmap.github.io/exploring-opencv-with-python/" rel="alternate" type="text/html" title="Exploring OpenCV with Python" /><published>2016-08-06T00:00:00+08:00</published><updated>2016-08-06T00:00:00+08:00</updated><id>https://handmap.github.io/exploring-opencv-with-python</id><content type="html" xml:base="https://handmap.github.io/exploring-opencv-with-python/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Today I begin my swim into the murky waters that is &lt;a href=&quot;http://opencv.org/&quot;&gt;OpenCV&lt;/a&gt; (Open Computer Vision). To help accommodate my learning I’ve decided to use the excellent resource by Adrian Rosebrock titled &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The main goals of this session are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Build a better understanding of what the OpenCV libraries are actually capable of rather than continuing to copy code from random examples expecting everything to just work.&lt;/li&gt;
+  &lt;li&gt;Build a base class to work with that includes an easy method of drawing video from an interfaced camera onto a display.&lt;/li&gt;
+  &lt;li&gt;Perform some kind of analysis on the captured video/images.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;python-opencv-requirement-overview&quot;&gt;Python OpenCV Requirement overview&lt;/h2&gt;
+
+&lt;h3 id=&quot;opencv&quot;&gt;opencv&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;p&gt;OpenCV itself can be rather painful to install on Linux and OSX. &lt;a href=&quot;http://www.pyimagesearch.com/opencv-tutorials-resources-guides/&quot;&gt;THIS&lt;/a&gt; is a fairly useful resource that should be kept fairly up to date when versions change. OpenCV is written in C/C++ at its core; however there are plenty of other lanaguages that have official binding into the package.&lt;/p&gt;
+
+&lt;h3 id=&quot;numpy&quot;&gt;numpy&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install numpy 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.numpy.org/&quot;&gt;NumPy&lt;/a&gt; is a python library that provides support for large multidimensional arrays. This is important to us because in order to analyse images we need a data structure capable of representing images as data. Take a look at an example of this below that is taken from the &lt;a href=&quot;https://www.tensorflow.org/versions/r0.9/tutorials/mnist/beginners/index.html&quot;&gt;TensorFlow MNIST For ML Beginners tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-06/MNIST-Matrix.png&quot; alt=&quot;TensorFlow MNIST&quot; /&gt;
+
+  &lt;figcaption&gt;TensorFlow MNIST image to multidimensional array&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As you can see the pixels associated with the shape are given weighted values indicating how dark/different they are from the background. This is in a sense how pixels on a display work, except they use RGB (0-&amp;gt;255) colour values and other methods to represent their data.&lt;/p&gt;
+
+&lt;h3 id=&quot;scipy&quot;&gt;scipy&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install scipy 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.scipy.org/&quot;&gt;SciPy&lt;/a&gt; is a package that goes hand-in-hand with NumPy. It provides extended support for highly optimized and efficient scientific computing.&lt;/p&gt;
+
+&lt;h3 id=&quot;matplotlib&quot;&gt;matplotlib&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install matplotlib 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://matplotlib.org/&quot;&gt;matplotlib&lt;/a&gt; is a plotting library similar to MATLAB. We will be using it extensively to analyse and plot the image data we capture.&lt;/p&gt;
+
+&lt;h3 id=&quot;mahotas&quot;&gt;mahotas&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install mahotas 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://mahotas.readthedocs.io/en/latest/&quot;&gt;Mahotas&lt;/a&gt; is a computer vision library written explicitely for the python language. Most of its functionality can already be found inside OpenCV however there are some edge cases where Mahotas will need to be used due to limitations on the OpenCV libary.&lt;/p&gt;
+
+&lt;h3 id=&quot;scikit-learn&quot;&gt;scikit-learn&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install scikit-learn 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://scikit-learn.org/&quot;&gt;scikit-learn&lt;/a&gt; is the machine learning library of choice when we deal with OpenCV. Early on it won’t be used often as our datasets will be quite limited, however overtime we might find a usecase for deep data analysis.&lt;/p&gt;
+
+&lt;h3 id=&quot;scikit-image&quot;&gt;scikit-image&lt;/h3&gt;
+&lt;hr /&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;pip install -U scikit-image 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://scikit-image.org/&quot;&gt;scikit-image&lt;/a&gt; provides some fantastic computer vision libraries that are maintained and optimised tremendously well.&lt;/p&gt;
+
+&lt;h2 id=&quot;loading-displaying-and-saving-images&quot;&gt;Loading, Displaying and Saving images&lt;/h2&gt;
+
+&lt;p&gt;Lets get started with setting up a simple program to load an image and display it on the screen. To do we’ll first need to import all the libraries we’re going to need. This can be done using the following code:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# The top import is for Python2.7 support&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;argparse&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next we setup some code to handle the command line arguements to take in the path to an image we wish to load from. We use the &lt;a href=&quot;https://docs.python.org/3/library/argparse.html&quot;&gt;argparse&lt;/a&gt; library for this.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# argparse to handle our command line arguments&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;--image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;required&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Path to the image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# parse the arguments and store them in a dictionary&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;vars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse_args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now we can write up some code to read in the image, process it and display it on the screen.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# load the image off the disk&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the imread function returns a NumPy array representing the image.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# examine the dimensions of the image. The images are represented&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# as NumPy arrays, so we can use the shape attribute to examine&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the width, height, and number of channels&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width: {} pixels&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;height: {} pixels&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;channels: {}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# handles displaying the actual image on my screen&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the first parameter is a string, the &quot;title&quot; of the window&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# the second parameter is a reference to the image we loaded.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# the cv2.waitKey paused the execution of the script until&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# we press a key on the keyboard.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# lastly we write our image to file in JPG format&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# new_image.jpg is just the path to the new file&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imwrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;new_image.jpg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now to test it’s as simple as following the command line arguments we setup. I’ve referenced an image ../images/trex.png in this example. This file was located in a folder called ‘images’ one step up in the folder hierarchy.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;python load_display_save.py --image ../images/trex.png
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Running this presents the following information in the console:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;﻿width: 350 pixels
+height: 228 pixels
+channels: 3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This data is the basic information that makes up our image. The height and width are expressed in pixels and you’ll also see 3 channel mentioned which represent the RGB components of the image file.&lt;/p&gt;
+
+&lt;p&gt;Our image represented as a NumPy array has a shape of (height, width, channels), or (228,350,3).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Matrix definitions are typically defines in the form of (# of rows) x (# of columns).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can also observe the image that we loaded has now appeared on the screen&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-06/OpenCV-image-read-save.png&quot; alt=&quot;Trex Output&quot; /&gt;
+
+  &lt;figcaption&gt;OpenCV load_display_save.py output image&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Pressing any key removes the image from the screen and then saves a new copy of the image as ‘new_image.jpg’ in the directory where I ran the script.&lt;/p&gt;
+
+&lt;h2 id=&quot;image-basics&quot;&gt;Image Basics&lt;/h2&gt;
+
+&lt;h3 id=&quot;pixels&quot;&gt;pixels&lt;/h3&gt;
+
+&lt;p&gt;Images consist of a set of pixels. These pixels are the fundamental building blocks of a image. A Pixel can be thought of a the “colour” or the “intensity” of light that appears at any given place in our image.&lt;/p&gt;
+
+&lt;p&gt;looking back to my trex.png image file, It had a resolution of 350 pixels * 228 pixels. This means that the image has a whopping 79800 pixels all up. Each of these pixels can be represented in two ways:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Grayscale
+    &lt;ul&gt;
+      &lt;li&gt;Each pixel has a value between 0 and 255&lt;/li&gt;
+      &lt;li&gt;This value represents each darker colour shift from white through to black.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Colour
+    &lt;ul&gt;
+      &lt;li&gt;Colour is made up of three RGB components (red, green and blue).&lt;/li&gt;
+      &lt;li&gt;We store three sets of values between 0 and 255.&lt;/li&gt;
+      &lt;li&gt;Each of these values is normally an 8-bit unsigned integer.&lt;/li&gt;
+      &lt;li&gt;These three 8bit values are combined into an RGB tuple in the form of (red, green, blue).&lt;/li&gt;
+      &lt;li&gt;Example: (255,255,255) is the colour White, while (255,0,0) is the colour red.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;image-coordinates&quot;&gt;image coordinates&lt;/h3&gt;
+
+&lt;p&gt;Image coordinates can be best examples by looking at the reference image below taken from the Practical Python and OpenCV tutorial book.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-06/Practical-Python-Coordinates.png&quot; alt=&quot;Image Coordinates&quot; /&gt;
+
+  &lt;figcaption&gt;Image coordinate example from PPaOCV book&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Above is an 8x8 grid containing 64 individual pixels. You can see how easy it is for us to reference a particular point in an image grid by simply referencing the (row,column) coordinates of the position.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note that Python and many other languages reference arrays of data starting from an index of 0. This means that the first position in the top left of our image is actually (0,0) and not (1,1)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;accessing-and-manipulating-pixels&quot;&gt;Accessing and Manipulating Pixels&lt;/h2&gt;
+
+&lt;p&gt;Next we’re going to try to manipulate our trex image in some way using what we just learnt about pixels and pixel coordinates. To start with I’m going to insert the following base code to setup our import image and display it with the title “Original”&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;argparse&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;--image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Path to the image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;vars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse_args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Original&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Each pixel in the ‘image’ dictionary that we produce with the code above can be referenced by its coordinates and contains a tuple representing its RGB colour.&lt;/p&gt;
+
+&lt;p&gt;I used the following code to check that the data was in fact in tuple form.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# place the prettyprint import at the top of the file&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pprint&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x value: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;&quot; y value: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;&quot; content: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pprint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pformat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This code presents all 79800 pixel entries with their corresponding RGB values. You can see a small example of this below.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;x value: 148 y value: 107 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;87, 92, 87], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 108 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;81, 87, 81], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 109 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;67, 74, 68], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 110 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;81, 89, 83], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 111 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;108, 118, 111], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 112 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt; 92, 101,  93], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 113 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;76, 86, 77], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 114 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;100, 110, 101], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 115 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt; 97, 108,  99], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 116 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;111, 125, 116], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 117 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;84, 96, 89], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 118 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;79, 86, 79], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+x value: 148 y value: 119 content: array&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;56, 58, 52], &lt;span class=&quot;nv&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;uint8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Something very important to note about the structure of the RGB tuple is that OpenCV stores the RGB channels in reverse order. So the normal [RED, GREEN, BLUE] is actually [BLUE, GREEN, RED]&lt;/p&gt;
+
+&lt;p&gt;I’ll demonstrate this with the following code that prints each pixel in the image with the colour label.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pixel at (&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;,&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;) - &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;&quot;Red: {}, Green: {}, Blue: {}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Output&lt;/span&gt;
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,201&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 239, Green: 240, Blue: 244
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,202&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 239, Green: 240, Blue: 244
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,203&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 239, Green: 240, Blue: 244
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,204&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 238, Green: 239, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,205&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 238, Green: 239, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,206&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 238, Green: 239, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,207&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 238, Green: 239, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,208&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 238, Green: 239, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,209&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 237, Green: 238, Blue: 242
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,210&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 237, Green: 238, Blue: 242
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,211&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 237, Green: 238, Blue: 243
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,212&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 236, Green: 237, Blue: 242
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,213&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 236, Green: 237, Blue: 242
+Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,214&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - Red: 236, Green: 237, Blue: 242
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;accessing-portions-of-an-image&quot;&gt;Accessing portions of an Image&lt;/h3&gt;
+
+&lt;p&gt;You can also access specific parts of an image instead of the whole thing. This kind of technique is important as you don’t want to be having to interate over the same image in its entirity every single time you’re running checks.&lt;/p&gt;
+
+&lt;p&gt;NumPy provides a technique called array slicing for this very problem. Lets take a look at the following code.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;argparse&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argparse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_argument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;--image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Path to the image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;vars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse_args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Original&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# grab 100 x 100 pixel region of the image&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;corner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Corner&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# change the colour of this region to green&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# present the updated image&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Updated&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The four expected indexes that we are expected to provide when slicing are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Start y
+    &lt;ul&gt;
+      &lt;li&gt;our slice starts at y = 0.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;End y
+    &lt;ul&gt;
+      &lt;li&gt;our slice stops alone the y-axis when y = 100.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Start x
+    &lt;ul&gt;
+      &lt;li&gt;our top left x slice starts at x = 0.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;End x
+    &lt;ul&gt;
+      &lt;li&gt;our slice stops when the x-axis is x = 100.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;All seemed to go well and I was presented with the output shown below. Note that I generated a number of different window sessions for each step I performed.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-06/OpenCV-crop-image.png&quot; alt=&quot;Image Crop&quot; /&gt;
+
+  &lt;figcaption&gt;OpenCV Image crop&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Today was very productive and ended up getting through a good portion of the tutorials. I am not comfortable doing the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Installing OpenCV requirements on Ubuntu.&lt;/li&gt;
+  &lt;li&gt;Loading and Saving images with OpenCV in python.&lt;/li&gt;
+  &lt;li&gt;Manipulating Pixels and image content with Splicing and For Loops.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In my next session I will be working on drawing boxes and lines over the top of images and hopefully also working with live video from my computers webcam.&lt;/p&gt;</content><category term="python" /><category term="opencv" /><summary>I delve deeper into OpenCV using the Python language and explore how it works at a lower level</summary></entry><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
 &lt;p&gt;Hand Map is the title I’ve given the project I’m currently in the process of implementing for my final year Computer Systems and Networking project with Curtin University.&lt;/p&gt;
 
