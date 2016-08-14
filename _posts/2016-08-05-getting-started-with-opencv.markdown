@@ -10,6 +10,7 @@ tags:
 ---
 
 ## Introduction
+---
 
 I've decided to investigate some of the computer vision libaries that are already available that could possibly already do what I need. This is likely to save me a lot of time not having to re-invent the wheel.
 
@@ -36,6 +37,7 @@ The potential for me to apply a similar algorithm to the one he was using to my 
 </figure>
 
 ## Installing OpenCV
+---
 
 My first task was to install OpenCV on a system that I could use to test the SmartMirror code. I span up an Ubuntu 16.04.1 instance and ran the following code to setup the latest OpenCV version on the system.
 
@@ -82,6 +84,7 @@ I had a play around with a number of the built in tools and was very impressed b
 </figure>
 
 ## SmartMirror Analysis
+---
 
 Now that I had OpenCV installed I decided I would attempt to demo the SmartMirror hand detection code to see if it was as good as it looked like it was.
 
@@ -119,6 +122,7 @@ Difficulty assign, the implementing was detecting my palm, and there was even lo
 </figure>
 
 ## Summary
+---
 
 Today was a productive session that really got me thinking about the possibilities that OpenCV has to offer. Now that I know that what I want to achieve is very possible with the OpenCV libraries I believe my next step will be to learn the OpenCV frameworks from scratch. My goal for the next week is to build up a small library myself so that I can begin to understand how other peoples code works without having to guess/hack a solution together.
 

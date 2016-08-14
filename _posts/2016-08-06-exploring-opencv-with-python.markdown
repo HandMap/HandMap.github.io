@@ -9,6 +9,7 @@ tags:
 ---
 
 ## Introduction
+---
 
 Today I begin my swim into the murky waters that is [OpenCV](http://opencv.org/) (Open Computer Vision). To help accommodate my learning I've decided to use the excellent resource by Adrian Rosebrock titled [Practical Python and OpenCV](https://www.pyimagesearch.com/practical-python-opencv/). 
 
@@ -78,6 +79,7 @@ $ pip install -U scikit-image
 [scikit-image](http://scikit-image.org/) provides some fantastic computer vision libraries that are maintained and optimised tremendously well.
 
 ## Loading, Displaying and Saving images
+---
 
 Lets get started with setting up a simple program to load an image and display it on the screen. To do we'll first need to import all the libraries we're going to need. This can be done using the following code:
 
@@ -161,8 +163,10 @@ We can also observe the image that we loaded has now appeared on the screen
 Pressing any key removes the image from the screen and then saves a new copy of the image as 'new_image.jpg' in the directory where I ran the script.
 
 ## Image Basics
+---
 
 ### pixels
+---
 
 Images consist of a set of pixels. These pixels are the fundamental building blocks of a image. A Pixel can be thought of a the "colour" or the "intensity" of light that appears at any given place in our image.
 
@@ -180,6 +184,7 @@ looking back to my trex.png image file, It had a resolution of 350 pixels * 228 
   * Example: (255,255,255) is the colour White, while (255,0,0) is the colour red.
   
 ### image coordinates
+---
 
 Image coordinates can be best examples by looking at the reference image below taken from the Practical Python and OpenCV tutorial book.
 
@@ -197,6 +202,7 @@ Above is an 8x8 grid containing 64 individual pixels. You can see how easy it is
 > Note that Python and many other languages reference arrays of data starting from an index of 0. This means that the first position in the top left of our image is actually (0,0) and not (1,1)
 
 ## Accessing and Manipulating Pixels
+---
 
 Next we're going to try to manipulate our trex image in some way using what we just learnt about pixels and pixel coordinates. To start with I'm going to insert the following base code to setup our import image and display it with the title "Original"
 
@@ -276,6 +282,7 @@ Pixel at (270,214) - Red: 236, Green: 237, Blue: 242
 ```
 
 ### Accessing portions of an Image
+---
 
 You can also access specific parts of an image instead of the whole thing. This kind of technique is important as you don't want to be having to interate over the same image in its entirity every single time you're running checks.
 
@@ -328,6 +335,7 @@ All seemed to go well and I was presented with the output shown below. Note that
 </figure>
 
 ## Conclusion
+---
 
 Today was very productive and ended up getting through a good portion of the tutorials. I am not comfortable doing the following:
 
