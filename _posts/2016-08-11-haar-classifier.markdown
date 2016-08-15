@@ -264,7 +264,7 @@ It is however very obvious that our training set wasn't deep enough when we get 
   <figcaption>Banana Detect Failed</figcaption>
 </figure>
 
-The failure is most likely because the training set didn't have enough variations of the Banana that included it in that orientation. If we look at the successful detections we can also note that the classification seems to pick up the very yellow parts of the banana; something that the image with the man didn't have.
+The failure is most likely because the training set didn't have enough variations of the Banana in that orientation. It's interesting to see that it picked up the curvature of the mans smile as a banana because most of our training data would have provided a very similar shape to that of his chin.
 
 ## Conclusion
 ---
