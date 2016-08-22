@@ -209,3 +209,8 @@ cv2.waitKey(0)
   {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
   <figcaption>Drawing Random Circles</figcaption>
 </figure>
+
+## Conclusion
+---
+
+This chapter provided me with the minimum things I require to get started with something more advanced. Next time I will be looking into the best methods for detecting the fingers on my hand using Gradients and edge detection methods.
