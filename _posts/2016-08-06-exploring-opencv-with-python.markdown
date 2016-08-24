@@ -344,3 +344,22 @@ Today was very productive and ended up getting through a good portion of the tut
 - Manipulating Pixels and image content with Splicing and For Loops.
 
 In my next session I will be working on drawing boxes and lines over the top of images and hopefully also working with live video from my computers webcam.
+
+### References
+---
+
+Adrian Rosebrock's Practical Python on OpenCV - [https://www.pyimagesearch.com/practical-python-opencv/](https://www.pyimagesearch.com/practical-python-opencv/)
+
+TensorFlow MNIST For ML Beginners tutorial - [https://www.tensorflow.org/versions/r0.9/tutorials/mnist/beginners/index.html](https://www.tensorflow.org/versions/r0.9/tutorials/mnist/beginners/index.html)
+
+SciPy - [https://www.scipy.org/](https://www.scipy.org/)
+
+matplotlib - [http://matplotlib.org/](http://matplotlib.org/)
+
+Mahotas - [http://mahotas.readthedocs.io/en/latest/](http://mahotas.readthedocs.io/en/latest/)
+
+scikit-learn - [http://scikit-learn.org/](http://scikit-learn.org/)
+
+scikit-image - [http://scikit-image.org/](http://scikit-image.org/)
+
+argparseg - [https://docs.python.org/3/library/argparse.html](https://docs.python.org/3/library/argparse.html)

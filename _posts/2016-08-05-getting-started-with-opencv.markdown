@@ -128,6 +128,9 @@ Today was a productive session that really got me thinking about the possibiliti
 
 I picked up a digital copy of [Practical Python and OpenCV](https://www.pyimagesearch.com/practical-python-opencv/) by Adrian Rosebrock as I've had it recommended to me before as a great practical reasource for learning the in's and out's of OpenCV.
 
-Until next time,
+### References
+---
 
-Nathan.
+Practical Python and OpenCV - [https://www.pyimagesearch.com/practical-python-opencv/](https://www.pyimagesearch.com/practical-python-opencv/)
+
+SmartMirror - [https://github.com/Shinao/SmartMirror](https://github.com/Shinao/SmartMirror)

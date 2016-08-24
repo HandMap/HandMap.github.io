@@ -305,3 +305,10 @@ The output of this can be viewed in the animated gif below, or if you would like
 ---
 
 Overall both of these methods were very interesting to explore. I'm certainly learning more towards Canny Edge detection however as it seems like a lot more control is available. However the downside to the extra control is the increased overhead associated with scanning the image and recalculating in hopes of finding a more suitable input.
+
+### References
+---
+
+OpenCV API drawing_functions - [http://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html#puttext](http://docs.opencv.org/2.4/modules/core/doc/drawing_functions)
+
+Adrian Rosebrock's Practical Python on OpenCV - [https://www.pyimagesearch.com/practical-python-opencv/](https://www.pyimagesearch.com/practical-python-opencv/)

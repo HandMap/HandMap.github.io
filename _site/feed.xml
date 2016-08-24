@@ -1,4 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-23T00:25:14+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Gradients and Edge Detection</title><link href="https://handmap.github.io/gradients-and-edge-detection/" rel="alternate" type="text/html" title="Gradients and Edge Detection" /><published>2016-08-22T00:00:00+08:00</published><updated>2016-08-22T00:00:00+08:00</updated><id>https://handmap.github.io/gradients-and-edge-detection</id><content type="html" xml:base="https://handmap.github.io/gradients-and-edge-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-08-25T00:34:21+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>‘Handy’ GestureAPI</title><link href="https://handmap.github.io/handy-gesture-api/" rel="alternate" type="text/html" title="'Handy' GestureAPI" /><published>2016-08-24T00:00:00+08:00</published><updated>2016-08-24T00:00:00+08:00</updated><id>https://handmap.github.io/handy-gesture-api</id><content type="html" xml:base="https://handmap.github.io/handy-gesture-api/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Today while researching approaches for quick Hand mapping using contours I came across a fantastic example in the form of a simple API by a young man named &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;Vasu Agrawal&lt;/a&gt;. Not only was his code a wealth of interesting examples but he also included some fantastic documentation that he kept whilst working on his Gesture tracking project at Carnegie Mellon University.&lt;/p&gt;
+
+&lt;p&gt;My goal tonight is to utilize his API and explore how he has overcome some of the problems I’ve been faced with when implementing some of my image processing methods from the previous posts.&lt;/p&gt;
+
+&lt;h2 id=&quot;converting-from-opencv2x-to-3x&quot;&gt;Converting from OpenCV2.x to 3.x&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;One of the first problems I needed to overcome was relating to the version of OpenCV Vasu had used when working on this project a few years back. I’m targetting OpenCV version 3+ whilst his API was written for OpenCV2.x.&lt;/p&gt;
+
+&lt;p&gt;The first issue in the code came from Lines 15 and 16 in &lt;code class=&quot;highlighter-rouge&quot;&gt;GesturesApi.py&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_CAP_PROP_FRAME_WIDTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_CAP_PROP_FRAME_HEIGHT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Both cv.CV_CAP_PROP_FRAME_WIDTH and HEIGHT respectively are not valid variables in the new version of OpenCV. To correct this problem I referenced the API docs for the &lt;a href=&quot;http://docs.opencv.org/3.1.0/d8/dfe/classcv_1_1VideoCapture.html&quot;&gt;VideoCapture.set() function&lt;/a&gt; and found that I simply needed to make the following modifications to update support for OpenCV3.x&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAP_PROP_FRAME_WIDTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAP_PROP_FRAME_HEIGHT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The second and last issue was with the findContours() method in &lt;code class=&quot;highlighter-rouge&quot;&gt;GesturesApi.py&lt;/code&gt; on lines 118 through 120.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findContours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thresholded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RETR_TREE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAIN_APPROX_SIMPLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Interestingly enough this was an issue I’d already dealt with previously so I knew the fix was to ammend a &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; before the &lt;code class=&quot;highlighter-rouge&quot;&gt;self.contours&lt;/code&gt; return variable. This is because in OpenCV2.x findContours() would only return two variables whereas now in &lt;a href=&quot;http://docs.opencv.org/3.0-beta/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontours#cv2.findContours&quot;&gt;OpenCV3.x&lt;/a&gt; we are returned the original input image along with the contours and hierarchy&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findContours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thresholded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RETR_TREE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAIN_APPROX_SIMPLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;testing-bundled-example&quot;&gt;Testing bundled Example&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;After ironing out the bugs from updating, I ran the code and was amazed by the results. Below is an example of what I was able to capture with my webcam facing my flat hand.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/nathan-hand-base-test.png&quot; alt=&quot;Flat Hand Detect&quot; /&gt;
+
+  &lt;figcaption&gt;Flat Hand Detect&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The results were great! but there’s a catch, It only works well in very specific conditions. For example, practically any light throws the entire process out of whack.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/nathan-hand-poor-test.png&quot; alt=&quot;Poor Hand Detect&quot; /&gt;
+
+  &lt;figcaption&gt;Poor Hand Detect&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The final thing I tested was how it handled by Partners hand. She is living with cerebral palsy and more specifically deals with flexion, or abnormal bending at the wrist or of the fingers, due to muscle spasticity on a daily basis. This means her hand won’t always be in a shape that is easily analysed, so I really wanted to know how the current algorithm handle the hand matching.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/yhana-hand-cp-test.png&quot; alt=&quot;Flexion Hand Detect&quot; /&gt;
+
+  &lt;figcaption&gt;Flexion Hand Detect&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The results of the test were very interesting as it looks like the center point of the hand isn’t calculated correctly due to the abrupt direction particular parts of the hand make. I do have the advantage of being able to utilize a small &lt;code class=&quot;highlighter-rouge&quot;&gt;lego brick style&lt;/code&gt; censor that will be placed on the hand during 3D capture. So hopefully I’ll be able to use this as a easy to identify point of reference.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;At this stage I’m really happy with the potential this API will offer. Huge thanks to &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;Vasu Agrawal&lt;/a&gt; again, seriously awesome work. I’m managing my own fork of the code base &lt;a href=&quot;https://github.com/HandMap/GestureDetection&quot;&gt;here&lt;/a&gt; that anyone can contribute to if they want.&lt;/p&gt;
+
+&lt;p&gt;Plans for next time will be augment my own ideas with the GestureApi core library and also make sure I can use a small &lt;code class=&quot;highlighter-rouge&quot;&gt;lego-like&lt;/code&gt; block as a reference point (haar classification will probably be the way I go).&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Spastic cerebral palsy - &lt;a href=&quot;https://www.cerebralpalsy.org.au/what-is-cerebral-palsy/types-of-cerebral-palsy/spastic-cerebral-palsy/&quot;&gt;https://www.cerebralpalsy.org.au/what-is-cerebral-palsy/types-of-cerebral-palsy/spastic-cerebral-palsy/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;GestureDetection API - &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;https://github.com/VasuAgrawal/GestureDetection&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="gestures" /><category term="api" /><summary>I found a fantastic project by Vasu Agrawal that was designed as a Gesture tracking system. I investigate it's portability for my project</summary></entry><entry><title>Gradients and Edge Detection</title><link href="https://handmap.github.io/gradients-and-edge-detection/" rel="alternate" type="text/html" title="Gradients and Edge Detection" /><published>2016-08-22T00:00:00+08:00</published><updated>2016-08-22T00:00:00+08:00</updated><id>https://handmap.github.io/gradients-and-edge-detection</id><content type="html" xml:base="https://handmap.github.io/gradients-and-edge-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I decided I’d best start actually writing some code that is vaguely relevant to my original project scope; that is, I’ll be looking at a method for detecting my hand using Gradient and Edge detection. The tutorials I’m following are again from Adrian Rosebrock’s book titled &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt;.&lt;/p&gt;
@@ -279,7 +365,14 @@
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;Overall both of these methods were very interesting to explore. I’m certainly learning more towards Canny Edge detection however as it seems like a lot more control is available. However the downside to the extra control is the increased overhead associated with scanning the image and recalculating in hopes of finding a more suitable input.&lt;/p&gt;</content><category term="opencv" /><category term="edge detection" /><category term="gradient" /><summary>Today I look at how I can begin detecting the fingers on my hand using gradient and edge detection techniques</summary></entry><entry><title>Drawing and Image Processing</title><link href="https://handmap.github.io/drawing-and-image-processing/" rel="alternate" type="text/html" title="Drawing and Image Processing" /><published>2016-08-20T00:00:00+08:00</published><updated>2016-08-20T00:00:00+08:00</updated><id>https://handmap.github.io/drawing-and-image-processing</id><content type="html" xml:base="https://handmap.github.io/drawing-and-image-processing/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Overall both of these methods were very interesting to explore. I’m certainly learning more towards Canny Edge detection however as it seems like a lot more control is available. However the downside to the extra control is the increased overhead associated with scanning the image and recalculating in hopes of finding a more suitable input.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;OpenCV API drawing_functions - &lt;a href=&quot;http://docs.opencv.org/2.4/modules/core/doc/drawing_functions&quot;&gt;http://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html#puttext&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Adrian Rosebrock’s Practical Python on OpenCV - &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;https://www.pyimagesearch.com/practical-python-opencv/&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="edge detection" /><category term="gradient" /><summary>Today I look at how I can begin detecting the fingers on my hand using gradient and edge detection techniques</summary></entry><entry><title>Drawing and Image Processing</title><link href="https://handmap.github.io/drawing-and-image-processing/" rel="alternate" type="text/html" title="Drawing and Image Processing" /><published>2016-08-20T00:00:00+08:00</published><updated>2016-08-20T00:00:00+08:00</updated><id>https://handmap.github.io/drawing-and-image-processing</id><content type="html" xml:base="https://handmap.github.io/drawing-and-image-processing/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;In the previous post I looked at Haar classification and briefly dealt with drawing ontop of image outputs in the form of square objects on potential matches. Today I will be further looking into how to draw ontop of images with various different shapes.&lt;/p&gt;
@@ -480,7 +573,14 @@
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;This chapter provided me with the minimum things I require to get started with something more advanced. Next time I will be looking into the best methods for detecting the fingers on my hand using Gradients and edge detection methods.&lt;/p&gt;</content><category term="opencv" /><summary>Today I look at Drawing and image processing in the OpenCV framework</summary></entry><entry><title>Haar Classifier Investigation</title><link href="https://handmap.github.io/haar-classifier/" rel="alternate" type="text/html" title="Haar Classifier Investigation" /><published>2016-08-11T00:00:00+08:00</published><updated>2016-08-11T00:00:00+08:00</updated><id>https://handmap.github.io/haar-classifier</id><content type="html" xml:base="https://handmap.github.io/haar-classifier/">&lt;h2 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h2&gt;
+&lt;p&gt;This chapter provided me with the minimum things I require to get started with something more advanced. Next time I will be looking into the best methods for detecting the fingers on my hand using Gradients and edge detection methods.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;OpenCV API drawing_functions - &lt;a href=&quot;http://docs.opencv.org/2.4/modules/core/doc/drawing_functions&quot;&gt;http://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html#puttext&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Adrian Rosebrock’s Practical Python on OpenCV - &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;https://www.pyimagesearch.com/practical-python-opencv/&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><summary>Today I look at Drawing and image processing in the OpenCV framework</summary></entry><entry><title>Haar Classifier Investigation</title><link href="https://handmap.github.io/haar-classifier/" rel="alternate" type="text/html" title="Haar Classifier Investigation" /><published>2016-08-11T00:00:00+08:00</published><updated>2016-08-11T00:00:00+08:00</updated><id>https://handmap.github.io/haar-classifier</id><content type="html" xml:base="https://handmap.github.io/haar-classifier/">&lt;h2 id=&quot;brief-introduction&quot;&gt;Brief Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Upon speaking with my mentor about the research topic I was pointed in the direction of Haar Cascade Classification for Object detection. The idea behind this method of detection is to use training data to help detect a particular object in a set of images. The training data itself is typically a few hundred sample views of a particular object; and when we compare these views to a input image we will be given a weighted likelihood on whether or not our image contains the same or similar characteristics are our training data.&lt;/p&gt;
@@ -745,7 +845,12 @@
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;I’d like to conclude on the note that the Haar Classification process is very time consuming and requires a lot of trial and error with data sets. It also doesn’t help that the set take such a long time to generate. If I do decide to go down the path of using Haar, I might need to make use of some existing Hand classification data sets instead of making my own.&lt;/p&gt;</content><category term="harr" /><category term="opencv" /><summary>My mentor spoke to me about Haar Image Classification with OpenCV. In this post I investigate how it works with a simple object detection example</summary></entry><entry><title>Exploring OpenCV with Python</title><link href="https://handmap.github.io/exploring-opencv-with-python/" rel="alternate" type="text/html" title="Exploring OpenCV with Python" /><published>2016-08-06T00:00:00+08:00</published><updated>2016-08-06T00:00:00+08:00</updated><id>https://handmap.github.io/exploring-opencv-with-python</id><content type="html" xml:base="https://handmap.github.io/exploring-opencv-with-python/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I’d like to conclude on the note that the Haar Classification process is very time consuming and requires a lot of trial and error with data sets. It also doesn’t help that the set take such a long time to generate. If I do decide to go down the path of using Haar, I might need to make use of some existing Hand classification data sets instead of making my own.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Thorsten Ball Haar Classification tutorial - &lt;a href=&quot;http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html&quot;&gt;http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html&lt;/a&gt;&lt;/p&gt;</content><category term="harr" /><category term="opencv" /><summary>My mentor spoke to me about Haar Image Classification with OpenCV. In this post I investigate how it works with a simple object detection example</summary></entry><entry><title>Exploring OpenCV with Python</title><link href="https://handmap.github.io/exploring-opencv-with-python/" rel="alternate" type="text/html" title="Exploring OpenCV with Python" /><published>2016-08-06T00:00:00+08:00</published><updated>2016-08-06T00:00:00+08:00</updated><id>https://handmap.github.io/exploring-opencv-with-python</id><content type="html" xml:base="https://handmap.github.io/exploring-opencv-with-python/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I begin my swim into the murky waters that is &lt;a href=&quot;http://opencv.org/&quot;&gt;OpenCV&lt;/a&gt; (Open Computer Vision). To help accommodate my learning I’ve decided to use the excellent resource by Adrian Rosebrock titled &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt;.&lt;/p&gt;
@@ -1101,7 +1206,26 @@ Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,214&lt;span class=&qu
   &lt;li&gt;Manipulating Pixels and image content with Splicing and For Loops.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;In my next session I will be working on drawing boxes and lines over the top of images and hopefully also working with live video from my computers webcam.&lt;/p&gt;</content><category term="python" /><category term="opencv" /><summary>I delve deeper into OpenCV using the Python language and explore how it works at a lower level</summary></entry><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;In my next session I will be working on drawing boxes and lines over the top of images and hopefully also working with live video from my computers webcam.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Adrian Rosebrock’s Practical Python on OpenCV - &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;https://www.pyimagesearch.com/practical-python-opencv/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;TensorFlow MNIST For ML Beginners tutorial - &lt;a href=&quot;https://www.tensorflow.org/versions/r0.9/tutorials/mnist/beginners/index.html&quot;&gt;https://www.tensorflow.org/versions/r0.9/tutorials/mnist/beginners/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SciPy - &lt;a href=&quot;https://www.scipy.org/&quot;&gt;https://www.scipy.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;matplotlib - &lt;a href=&quot;http://matplotlib.org/&quot;&gt;http://matplotlib.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Mahotas - &lt;a href=&quot;http://mahotas.readthedocs.io/en/latest/&quot;&gt;http://mahotas.readthedocs.io/en/latest/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;scikit-learn - &lt;a href=&quot;http://scikit-learn.org/&quot;&gt;http://scikit-learn.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;scikit-image - &lt;a href=&quot;http://scikit-image.org/&quot;&gt;http://scikit-image.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;argparseg - &lt;a href=&quot;https://docs.python.org/3/library/argparse.html&quot;&gt;https://docs.python.org/3/library/argparse.html&lt;/a&gt;&lt;/p&gt;</content><category term="python" /><category term="opencv" /><summary>I delve deeper into OpenCV using the Python language and explore how it works at a lower level</summary></entry><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Hand Map is the title I’ve given the project I’m currently in the process of implementing for my final year Computer Systems and Networking project with Curtin University.&lt;/p&gt;
@@ -1238,6 +1362,9 @@ Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,214&lt;span class=&qu
 
 &lt;p&gt;I picked up a digital copy of &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt; by Adrian Rosebrock as I’ve had it recommended to me before as a great practical reasource for learning the in’s and out’s of OpenCV.&lt;/p&gt;
 
-&lt;p&gt;Until next time,&lt;/p&gt;
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;Nathan.&lt;/p&gt;</content><category term="project" /><category term="opencv" /><category term="ubuntu" /><summary>I begin to investigate one of the most popular open source computer vision libraies, OpenCV</summary></entry></feed>
+&lt;p&gt;Practical Python and OpenCV - &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;https://www.pyimagesearch.com/practical-python-opencv/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SmartMirror - &lt;a href=&quot;https://github.com/Shinao/SmartMirror&quot;&gt;https://github.com/Shinao/SmartMirror&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><category term="opencv" /><category term="ubuntu" /><summary>I begin to investigate one of the most popular open source computer vision libraies, OpenCV</summary></entry></feed>

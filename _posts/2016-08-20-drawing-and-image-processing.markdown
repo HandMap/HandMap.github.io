@@ -214,3 +214,10 @@ cv2.waitKey(0)
 ---
 
 This chapter provided me with the minimum things I require to get started with something more advanced. Next time I will be looking into the best methods for detecting the fingers on my hand using Gradients and edge detection methods.
+
+### References
+---
+
+OpenCV API drawing_functions - [http://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html#puttext](http://docs.opencv.org/2.4/modules/core/doc/drawing_functions)
+
+Adrian Rosebrock's Practical Python on OpenCV - [https://www.pyimagesearch.com/practical-python-opencv/](https://www.pyimagesearch.com/practical-python-opencv/)

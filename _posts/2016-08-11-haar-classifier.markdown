@@ -270,3 +270,8 @@ The failure is most likely because the training set didn't have enough variation
 ---
 
 I'd like to conclude on the note that the Haar Classification process is very time consuming and requires a lot of trial and error with data sets. It also doesn't help that the set take such a long time to generate. If I do decide to go down the path of using Haar, I might need to make use of some existing Hand classification data sets instead of making my own.
+
+### References
+---
+
+Thorsten Ball Haar Classification tutorial - [http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html](http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html)
