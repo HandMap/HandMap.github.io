@@ -7,4 +7,4 @@ tags:
 - video
 ---
 
-<iframe width="640" height="360" src="https://www.youtube.com/v/=y94tOSxF8jw" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/y94tOSxF8jw" frameborder="0" allowfullscreen></iframe>
