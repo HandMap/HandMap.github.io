@@ -1,0 +1,178 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Object tracking by colour &#8211; Hand Map</title> <meta name="description" content="I updated my RGBControl library to do item tracking while also displaying a tail behind it"> <meta name="keywords" content="opencv, rgb, tracking"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Object tracking by colour"> <meta name="twitter:description" content="I updated my RGBControl library to do item tracking while also displaying a tail behind it"> <meta name="twitter:site" content="@nathangloverAUS"> <meta name="twitter:creator" content="@nathangloverAUS"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Object tracking by colour"> <meta property="og:description" content="I updated my RGBControl library to do item tracking while also displaying a tail behind it"> <meta property="og:url" content="https://handmap.github.io/object-tracking-by-colour/"> <meta property="og:site_name" content="Hand Map"> <meta property="og:image" content="https://handmap.github.io/images/halve.png"> <link rel="canonical" href="https://handmap.github.io/object-tracking-by-colour/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="https://handmap.github.io/feed.xml" title="Hand Map" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="https://handmap.github.io/favicon.png" /> <link rel="shortcut icon" href="https://handmap.github.io/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="https://handmap.github.io/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://handmap.github.io/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://handmap.github.io/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(https://handmap.github.io/images/home.png) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="https://handmap.github.io" class="logo"><img src="https://handmap.github.io/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Object tracking by colour </h1> <ul class="tags"> <li><a href="https://handmap.github.io/tags#opencv">opencv</a></li> <li><a href="https://handmap.github.io/tags#rgb">rgb</a></li> <li><a href="https://handmap.github.io/tags#tracking">tracking</a></li> </ul> <div class="section-line reverse"><a href="https://handmap.github.io/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <div class="share-buttons"> <a href="https://twitter.com/intent/tweet?text=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> <a href="https://www.facebook.com/sharer/sharer.php?u=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a> <a href="https://plus.google.com/share?url=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a> </div> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">13 Sep 2016</div> <h2 id="introduction">Introduction</h2> <hr /> <p>This week I worked on finding some different ways to interact with my objects that were detected by colour and came up with a new feature for my RGBcontrol library</p> <p>The code for this weeks work can be found in the <a href="https://github.com/HandMap/boundedRGB">boundedRGB git repo</a> and contains much of the same code as last week</p> <h2 id="the-code">The code</h2> <hr /> <p>The code for this new section is shown below; It is mostly copy pastes from <a href="http://www.pyimagesearch.com/2015/09/21/opencv-track-object-movement/">Adrian Rosebrock</a> but i’ve put my own logic in there as well to help make it more usable for my idea</p> <div class="highlighter-rouge"><pre class="highlight"><code># import the necessary packages
+from collections import deque
+import numpy as np
+import imutils
+import cv2
+import sys
+
+cap = cv2.VideoCapture(0)
+ret, image = cap.read()
+
+masking = False
+tracking = True
+
+def nothing(*arg):
+    pass
+
+
+def setBlue():
+    cv2.setTrackbarPos('lower - red', 'RGB', 86)
+    cv2.setTrackbarPos('lower - green', 'RGB', 31)
+    cv2.setTrackbarPos('lower - blue', 'RGB', 4)
+    cv2.setTrackbarPos('upper - red', 'RGB', 246)
+    cv2.setTrackbarPos('upper - green', 'RGB', 96)
+    cv2.setTrackbarPos('upper - blue', 'RGB', 57)
+
+
+cv2.namedWindow('RGB')
+cv2.createTrackbar('lower - red', 'RGB', 0, 255, nothing)
+cv2.createTrackbar('lower - green', 'RGB', 0, 255, nothing)
+cv2.createTrackbar('lower - blue', 'RGB', 0, 255, nothing)
+
+cv2.createTrackbar('upper - red', 'RGB', 1, 255, nothing)
+cv2.createTrackbar('upper - green', 'RGB', 1, 255, nothing)
+cv2.createTrackbar('upper - blue', 'RGB', 1, 255, nothing)
+
+setBlue()
+
+if masking:
+    while True:
+        # Capture frame-by-frame
+        ret, image = cap.read()
+
+        thrs1 = cv2.getTrackbarPos('lower - red', 'RGB')
+        thrs2 = cv2.getTrackbarPos('lower - green', 'RGB')
+        thrs3 = cv2.getTrackbarPos('lower - blue', 'RGB')
+        thrs4 = cv2.getTrackbarPos('upper - red', 'RGB')
+        thrs5 = cv2.getTrackbarPos('upper - green', 'RGB')
+        thrs6 = cv2.getTrackbarPos('upper - blue', 'RGB')
+
+        if (thrs1 &gt; thrs4):
+            cv2.setTrackbarPos('lower - red', 'RGB', thrs4 - 1)
+        if (thrs2 &gt; thrs5):
+            cv2.setTrackbarPos('lower - green', 'RGB', thrs5 - 1)
+        if (thrs3 &gt; thrs6):
+            cv2.setTrackbarPos('lower - blue', 'RGB', thrs6 - 1)
+
+        # define the list of boundaries
+        boundaries = [
+            ([thrs3, thrs2, thrs1], [thrs6, thrs5, thrs4])
+        ]
+
+        # loop over the boundaries
+        for (lower, upper) in boundaries:
+            # create NumPy arrays from the boundaries
+            lower = np.array(lower, dtype="uint8")
+            upper = np.array(upper, dtype="uint8")
+
+            # find the colors within the specified boundaries and apply
+            # the mask
+            mask = cv2.inRange(image, lower, upper)
+            output = cv2.bitwise_and(image, image, mask=mask)
+
+            imageOut = np.hstack([image, output])
+
+        # Display the resulting frame
+        cv2.imshow('RGB', imageOut)
+        if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+            masking = False
+            break
+
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
+
+if tracking:
+
+    # initialize the list of tracked points, the frame counter,
+    # and the coordinate deltas
+    linelength = 16
+    pts = deque(maxlen=linelength)
+    counter = 0
+    (dX, dY) = (0, 0)
+    direction = ""
+
+    while True:
+        # Capture frame-by-frame
+        (grabbed, image) = cap.read()
+
+        thrs1 = cv2.getTrackbarPos('lower - red', 'RGB')
+        thrs2 = cv2.getTrackbarPos('lower - green', 'RGB')
+        thrs3 = cv2.getTrackbarPos('lower - blue', 'RGB')
+        thrs4 = cv2.getTrackbarPos('upper - red', 'RGB')
+        thrs5 = cv2.getTrackbarPos('upper - green', 'RGB')
+        thrs6 = cv2.getTrackbarPos('upper - blue', 'RGB')
+
+        if (thrs1 &gt; thrs4):
+            cv2.setTrackbarPos('lower - red', 'RGB', thrs4 - 1)
+        if (thrs2 &gt; thrs5):
+            cv2.setTrackbarPos('lower - green', 'RGB', thrs5 - 1)
+        if (thrs3 &gt; thrs6):
+            cv2.setTrackbarPos('lower - blue', 'RGB', thrs6 - 1)
+
+        colourLower = (thrs1, thrs2, thrs3)
+        colourUpper = (thrs4, thrs5, thrs6)
+
+        # resize the frame, blur it, and convert it to the HSV
+        # color space
+        image = imutils.resize(image, width=600)
+        # blurred = cv2.GaussianBlur(frame, (11, 11), 0)
+        # hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+        # construct a mask for the object colour, then perform
+        # a series of dilations and erosions to remove any small
+        # blobs left in the mask
+        mask = cv2.inRange(image, colourLower, colourUpper)
+        mask = cv2.erode(mask, None, iterations=2)
+        mask = cv2.dilate(mask, None, iterations=2)
+
+        # find contours in the mask and initialize the current
+        # (x, y) center of the ball
+        cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL,
+                                cv2.CHAIN_APPROX_SIMPLE)[-2]
+        center = None
+
+        # only proceed if at least one contour was found
+        if len(cnts) &gt; 0:
+            # find the largest contour in the mask, then use
+            # it to compute the minimum enclosing circle and
+            # centroid
+            c = max(cnts, key=cv2.contourArea)
+            ((x, y), radius) = cv2.minEnclosingCircle(c)
+            M = cv2.moments(c)
+            center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+
+            # only proceed if the radius meets a minimum size
+            if radius &gt; 10:
+                # draw the circle and centroid on the frame,
+                # then update the list of tracked points
+                cv2.circle(image, (int(x), int(y)), int(radius),
+                           (0, 255, 255), 2)
+                cv2.circle(image, center, 5, (0, 0, 255), -1)
+                pts.appendleft(center)
+
+        # loop over the set of tracked points
+        for i in np.arange(1, len(pts)):
+            # if either of the tracked points are None, ignore
+            # them
+            if pts[i - 1] is None or pts[i] is None:
+                continue
+
+            # otherwise, compute the thickness of the line and
+            # draw the connecting lines
+            thickness = int(np.sqrt(linelength / float(i + 1)) * 2.5)
+            cv2.line(image, pts[i - 1], pts[i], (0, 0, 255), thickness)
+
+        # show the frame to our screen and increment the frame counter
+        cv2.imshow("RGB", image)
+        key = cv2.waitKey(1) &amp; 0xFF
+        counter += 1
+
+        if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+            tracking = False
+            break
+
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
+</code></pre></div> <h2 id="the-results">The Results</h2> <hr /> <p>Below is the result of the small program. I can single out objects based on colour within the webcam frame and track them as they move across the image.</p> <figure> <img src="https://handmap.github.io/images/posts/2016-09-13/opencv-object-tracking.gif" alt="OpenCV Lego Brick" /> <figcaption>Object tracking based on colour</figcaption> </figure> <br> <a href="https://twitter.com/intent/tweet?text=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> <a href="https://www.facebook.com/sharer/sharer.php?u=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a> <a href="https://plus.google.com/share?url=https://handmap.github.io/object-tracking-by-colour/" class="btn btn_google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a> <nav class="pagination"> <a href="https://handmap.github.io/colour-detection-using-rgb-boundaries/" class="pagination_pager" title="Colour detection using RGB boundaries ">previous</a> <a href="#" class="pagination_pager disabled">next</a> </nav> </div> </div> <!-- JS --> <script src="https://handmap.github.io/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(https://github.com/HandMap/HandMap.github.io/blob/master/images/project.jpg) center center no-repeat;"> <a href="https://handmap.github.io" class="inactive" target="_blank" rel="nofollow external"> <span> Hand Map Project <br><em>in progress</em> </span> </a> </li> </ul> </div> </body> </html>
