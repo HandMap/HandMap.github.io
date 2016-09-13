@@ -21,7 +21,7 @@ The code for this weeks work can be found in the [boundedRGB git repo](https://g
 
 The code for this new section is shown below; It is mostly copy pastes from [Adrian Rosebrock](http://www.pyimagesearch.com/2015/09/21/opencv-track-object-movement/) but i've put my own logic in there as well to help make it more usable for my idea
 
-```
+```python
 # import the necessary packages
 from collections import deque
 import numpy as np
