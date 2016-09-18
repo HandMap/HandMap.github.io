@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-13T15:29:54+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Object tracking by colour</title><link href="https://handmap.github.io/object-tracking-by-colour/" rel="alternate" type="text/html" title="Object tracking by colour" /><published>2016-09-13T00:00:00+08:00</published><updated>2016-09-13T00:00:00+08:00</updated><id>https://handmap.github.io/object-tracking-by-colour</id><content type="html" xml:base="https://handmap.github.io/object-tracking-by-colour/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-18T23:02:42+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Angle mapping problem description</title><link href="https://handmap.github.io/angle-mapping-problem-description/" rel="alternate" type="text/html" title="Angle mapping problem description" /><published>2016-09-18T00:00:00+08:00</published><updated>2016-09-18T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-problem-description</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-problem-description/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;One of the problems I’m currently looking to solve is how I’m going to be mapping and calculating the angular offset from the wrist that the hand is bending at. The reason for investigating this particular issue came about whilst speaking with a contacts from PMH and the OT department at Curtin University.&lt;/p&gt;
+
+&lt;p&gt;In the following post I’ll do my best to outline the problem and state a few of my assumptions as to keep a good record of my workings.&lt;/p&gt;
+
+&lt;h3 id=&quot;assumption-1---cube-sensor&quot;&gt;Assumption 1 - Cube Sensor&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;One of the key pieces of information I’m basing this description on is the idea that I’ll be able to extract positional and gravitational data from the various sensors inside of the Blue box. The piece of data that will be most helpful is a measurement telling me what direction gravity is pulling downwards.&lt;/p&gt;
+
+&lt;p&gt;The figure below gives an idea of the data expected to be supplied.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand.png&quot; alt=&quot;Hand Gravity&quot; /&gt;
+
+  &lt;figcaption&gt;Gravitational data from box sensor&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;assumption-2---high-point-on-hand&quot;&gt;Assumption 2 - High Point on Hand&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The next assumption I’ll be making for now is that the peak point on the bent hand is where I’ll be taking the centered measurement. If I use this assumption I should be able to begin calculating the angles using a method outlined in the image below:&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand-aligned.png&quot; alt=&quot;Hand Gravity Transform&quot; /&gt;
+
+  &lt;figcaption&gt;Gravitational transform to centre point&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;assumption-3---box-transformation&quot;&gt;Assumption 3 - Box Transformation&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The third assumption is that if I take half the height of the box and use it to construct an imaginatry replica of the current box at a given position down the arm, I’ll be able to use that as a reference point for my other angle. This angle would be the last piece of information I’d need to fairly accurately plot the bend in the hand/arm.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand-box-transform.png&quot; alt=&quot;Box Transform&quot; /&gt;
+
+  &lt;figcaption&gt;Box transform idea&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;possible-issues&quot;&gt;Possible Issues&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;problem-1&quot;&gt;Problem 1&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Unknown scale could lead to an issue where I can’t compute the angle because I don’t have any way of calculating the distance&lt;/p&gt;
+
+&lt;h3 id=&quot;solution-1&quot;&gt;Solution 1&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Simply have a line(s) printed on the box with a length of exactly 1cm. This line could be used as a size/scaling reference point and used in the final calculations.&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-2&quot;&gt;Problem 2&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;This method only works side on&lt;/p&gt;
+
+&lt;h3 id=&quot;solution-2&quot;&gt;Solution 2&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The final implementation looks like it will require an image from the Top-down and Side-on. Means another method will be implemented for Size-on captures&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-3&quot;&gt;Problem 3&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;What if the highest point on the hand isn’t the bend in the wrist?&lt;/p&gt;
+
+&lt;h3 id=&quot;solution-3&quot;&gt;Solution 3&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;I don’t think I can use the ‘highest’ point per se. More than likely it will actually be that contour mapping and feature detection methods will identify the Pisiform (pointy bone on wrist) and that will be considered the primary axis.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The above concept doesn’t really have much backing to it yet and I’ll still need to do the maths and work out if it makes sense technically. I’d also like to cover the mapping of the hand from the Top-down method and identify how that will work.&lt;/p&gt;</content><category term="angle" /><summary>I outline my interpretation of the angle mapping/calculation problem I'm currently working on for the project</summary></entry><entry><title>Object tracking by colour</title><link href="https://handmap.github.io/object-tracking-by-colour/" rel="alternate" type="text/html" title="Object tracking by colour" /><published>2016-09-13T00:00:00+08:00</published><updated>2016-09-13T00:00:00+08:00</updated><id>https://handmap.github.io/object-tracking-by-colour</id><content type="html" xml:base="https://handmap.github.io/object-tracking-by-colour/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;This week I worked on finding some different ways to interact with my objects that were detected by colour and came up with a new feature for my RGBcontrol library&lt;/p&gt;
@@ -1588,118 +1669,4 @@ Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,214&lt;span class=&qu
 
 &lt;p&gt;Jekyll: &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;https://jekyllrb.com/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Github Pages: &lt;a href=&quot;https://pages.github.com/&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><summary>An introduction and breakdown of what is required for this project to be successful</summary></entry><entry><title>Getting started with OpenCV</title><link href="https://handmap.github.io/getting-started-with-opencv/" rel="alternate" type="text/html" title="Getting started with OpenCV" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/getting-started-with-opencv</id><content type="html" xml:base="https://handmap.github.io/getting-started-with-opencv/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;I’ve decided to investigate some of the computer vision libaries that are already available that could possibly already do what I need. This is likely to save me a lot of time not having to re-invent the wheel.&lt;/p&gt;
-
-&lt;p&gt;I had the idea to look into OpenCV when I noticed a particular repository trending on &lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt; the other day. The repo in question; maintained by &lt;a href=&quot;https://github.com/Shinao&quot;&gt;Raphael Monnerat&lt;/a&gt; was titled &lt;a href=&quot;https://github.com/Shinao/SmartMirror&quot;&gt;SmartMirror&lt;/a&gt; and is designed to turn a two-way mirror into a gesture controlled smart device.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_DisplayMenu_Preview.gif&quot; alt=&quot;Smart Mirror&quot; /&gt;
-
-  &lt;figcaption&gt;Raphael using Smart Mirror&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The potential for me to apply a similar algorithm to the one he was using to my project was almost too obvious, as it looked as though his implementation used some form of Hand Detection/Recognition. He even had a debugging tool packaged with his code that would display the gesture recognition information in real time while testing.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug.png&quot; alt=&quot;Smart Mirror Debug&quot; /&gt;
-
-  &lt;figcaption&gt;Smart Mirror Debug&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;installing-opencv&quot;&gt;Installing OpenCV&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;My first task was to install OpenCV on a system that I could use to test the SmartMirror code. I span up an Ubuntu 16.04.1 instance and ran the following code to setup the latest OpenCV version on the system.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Install pre-requisites&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get update
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get upgrade
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install build-essential
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
-
-&lt;span class=&quot;c&quot;&gt;## Change directory into a working folder&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Documents/
-
-&lt;span class=&quot;c&quot;&gt;## Clone OpenCV repo and build from source&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/opencv/opencv.git
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv/
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;mkdir release
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;release/
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cmake -D &lt;span class=&quot;nv&quot;&gt;CMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;RELEASE -D &lt;span class=&quot;nv&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local ..
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;make
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Now that I had the latest version of OpenCV installed I needed to make sure it was working. I also decided that my language of choice; particularly during the initial testing phases would be Python.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Change into the OpenCV samples directory&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;~/Documents&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv/samples/python/
-
-&lt;span class=&quot;c&quot;&gt;## Either run each tool separately or use demo.py to list all demos&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;python demo.py 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;I had a play around with a number of the built in tools and was very impressed by the level of quality and detailed code each example provided. One of my personal favorites was the ‘edge.py’ example as I felt like it would provide a very good starting point for when I begin writing my hand detection method.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/OpenCV-Edgepy-test.png&quot; alt=&quot;OpenCV Edge Detection&quot; /&gt;
-
-  &lt;figcaption&gt;OpenCV Canny Edge Detection&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;smartmirror-analysis&quot;&gt;SmartMirror Analysis&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Now that I had OpenCV installed I decided I would attempt to demo the SmartMirror hand detection code to see if it was as good as it looked like it was.&lt;/p&gt;
-
-&lt;p&gt;I started out by cloning the repository using git and locating the ‘test.py’ file mentioned in the repo README.md.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Change into SmartMirror/Motion directory&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/Shinao/SmartMirror.git
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;SmartMirror/Motion
-
-&lt;span class=&quot;c&quot;&gt;## Execute the test.py script&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;python test.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The example was very finicky to get working, The hand detection itself works very well when it isn’t getting confused about the background lighting.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug_Nathan_3slide.png&quot; alt=&quot;SmartMirror Hand Detection&quot; /&gt;
-
-  &lt;figcaption&gt;SmartMirror Hand Detection&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Difficulty assign, the implementing was detecting my palm, and there was even logic in place to handle hand movements (swiping in different directions).&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-05/SmartMirror_Debug_Nathan_gesture.png&quot; alt=&quot;SmartMirror Hand Detection&quot; /&gt;
-
-  &lt;figcaption&gt;SmartMirror Gesture&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Today was a productive session that really got me thinking about the possibilities that OpenCV has to offer. Now that I know that what I want to achieve is very possible with the OpenCV libraries I believe my next step will be to learn the OpenCV frameworks from scratch. My goal for the next week is to build up a small library myself so that I can begin to understand how other peoples code works without having to guess/hack a solution together.&lt;/p&gt;
-
-&lt;p&gt;I picked up a digital copy of &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;Practical Python and OpenCV&lt;/a&gt; by Adrian Rosebrock as I’ve had it recommended to me before as a great practical reasource for learning the in’s and out’s of OpenCV.&lt;/p&gt;
-
-&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Practical Python and OpenCV - &lt;a href=&quot;https://www.pyimagesearch.com/practical-python-opencv/&quot;&gt;https://www.pyimagesearch.com/practical-python-opencv/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;SmartMirror - &lt;a href=&quot;https://github.com/Shinao/SmartMirror&quot;&gt;https://github.com/Shinao/SmartMirror&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><category term="opencv" /><category term="ubuntu" /><summary>I begin to investigate one of the most popular open source computer vision libraies, OpenCV</summary></entry></feed>
+&lt;p&gt;Github Pages: &lt;a href=&quot;https://pages.github.com/&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><summary>An introduction and breakdown of what is required for this project to be successful</summary></entry></feed>
