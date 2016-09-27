@@ -6,6 +6,8 @@ excerpt: I have fought the good fight and feel the need to share the process I f
 tags:
 - opencv
 - sierra
+- java
+- python
 ---
 
 ## Problem
@@ -32,10 +34,10 @@ So the solution has already been implemented for the OpenCV upstream HEAD branch
 
 ```bash
 brew tap homebrew/science
-brew install opencv3 --HEAD --with-contrib --with-python3
+brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
 ```
 
-You can omit the `--with-python3` off the end if you don't it installed for python3, however there's no harm having both (just make sure you've got your python path registered with homebrew.
+You can omit the `--with-python3` and `--with-java` off the end if you don't want it installed for python3 or java, however there's no harm having it built. You might just want to make sure you've got your python path registered with homebrew.
 
 Below is a list of other arguements that are available if you see fit:
 
@@ -113,7 +115,7 @@ echo /usr/local/opt/opencv3/lib/python3.5/site-packages >> /usr/local/lib/python
 
 Your version of the command above might vary depending on where you local python libraries are installed. Amend as necessary.
 
-And presto! you should be able to import and check the version of OpenCV from the command line interpreter
+And presto! you should be able to import and check the version of OpenCV from the python command line interpreter
 
 ```bash
 # nathan at nathan-macbook in ~ [23:51:55]
@@ -126,6 +128,25 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import cv2
 >>> cv2.__version__
 '3.1.0-dev'
+```
+
+Java is fairly similar and the libraries you'll be working with can be found at the following location:
+
+```bash
+/usr/local/opt/opencv3/share/OpenCV/java/opencv-310.jar
+```
+
+You can include this library and utilize it in a similar fashion to python.
+
+```java
+import org.opencv.core.Core;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println(Core.VERSION);
+    }
+}
 ```
 
 ## Conclusion

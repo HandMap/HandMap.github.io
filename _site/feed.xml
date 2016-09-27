@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-18T23:02:42+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Angle mapping problem description</title><link href="https://handmap.github.io/angle-mapping-problem-description/" rel="alternate" type="text/html" title="Angle mapping problem description" /><published>2016-09-18T00:00:00+08:00</published><updated>2016-09-18T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-problem-description</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-problem-description/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-28T01:07:13+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>OpenCV3.1 install on MacOS Sierra</title><link href="https://handmap.github.io/opencv3-install-on-macos-sierra/" rel="alternate" type="text/html" title="OpenCV3.1 install on MacOS Sierra" /><published>2016-09-27T00:00:00+08:00</published><updated>2016-09-27T00:00:00+08:00</updated><id>https://handmap.github.io/opencv3-install-on-macos-sierra</id><content type="html" xml:base="https://handmap.github.io/opencv3-install-on-macos-sierra/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;So for the past month and a half I have battled furiously with getting OpenCV installed on my Macbook Pro that I accidentally upgraded to Sierra on.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;QTKit/QTKit.h&amp;gt;&lt;/span&gt;
+        ^
+1 error generated.
+make[2]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_qtkit.mm.o] Error 1
+make[2]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; Waiting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;unfinished jobs....
+make[1]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;modules/videoio/CMakeFiles/opencv_videoio.dir/all] Error 2
+make: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;all] Error 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I’m not alone with troubles as it seems that some of the core video/image access and manipulation libraries are no longer bundled with Xcode 8.0 command line tools. To add insult to injury even if you install version &amp;gt;7.0 command line tools you’ll still have issues on Sierra.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven’t quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing openCV3 with the following arguments&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew tap homebrew/science
+brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can omit the &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-python3&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-java&lt;/code&gt; off the end if you don’t want it installed for python3 or java, however there’s no harm having it built. You might just want to make sure you’ve got your python path registered with homebrew.&lt;/p&gt;
+
+&lt;p&gt;Below is a list of other arguements that are available if you see fit:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;==&amp;gt; &lt;/span&gt;Options
+--32-bit
+	Build 32-bit only
+--c++11
+	Build using C++11 mode
+--with-contrib
+	Build &lt;span class=&quot;s2&quot;&gt;&quot;extra&quot;&lt;/span&gt; contributed modules
+--with-cuda
+	Build with CUDA v7.0+ support
+--with-examples
+	Install C and python examples &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sources&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+--with-ffmpeg
+	Build with ffmpeg support
+--with-gphoto2
+	Build with gphoto2 support
+--with-gstreamer
+	Build with gstreamer support
+--with-jasper
+	Build with jasper support
+--with-java
+	Build with Java support
+--with-libdc1394
+	Build with libdc1394 support
+--with-opengl
+	Build with OpenGL support &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;must use --with-qt5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+--with-openni
+	Build with openni support
+--with-openni2
+	Build with openni2 support
+--with-python3
+	Build with python3 support
+--with-qt
+	Build the Qt4 backend to HighGUI
+--with-qt5
+	Build the Qt5 backend to HighGUI
+--with-quicktime
+	Use QuickTime &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Video I/O instead of QTKit
+--with-static
+	Build static libraries
+--with-tbb
+	Enable parallel code &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;OpenCV using Intel TBB
+--with-vtk
+	Build with vtk support
+--without-eigen
+	Build without eigen support
+--without-numpy
+	Use a numpy you&lt;span class=&quot;s1&quot;&gt;'ve installed yourself instead of a Homebrew-packaged numpy
+--without-opencl
+	Disable GPU code in OpenCV using OpenCL
+--without-openexr
+	Build without openexr support
+--without-python
+	Build without Python support
+--without-test
+	Build without accuracy &amp;amp; performance tests
+--HEAD
+	Install HEAD version
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I would highly recommend installing and symlinking python2 and python3 with brew instead, as it’ll keep things neat and tidy.&lt;/p&gt;
+
+&lt;p&gt;Once you’ve successfully installed OpenCV3 you’ll needed to symlink a couple paths for your python2 and python3 libraries. This is done with the following commands&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Python 2.7&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; /usr/local/opt/opencv3/lib/python2.7/site-packages &amp;gt;&amp;gt; /usr/local/lib/python2.7/site-packages/opencv3.pth
+
+&lt;span class=&quot;c&quot;&gt;## Python 3.5&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; /usr/local/opt/opencv3/lib/python3.5/site-packages &amp;gt;&amp;gt; /usr/local/lib/python3.5/site-packages/opencv3.pth
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Your version of the command above might vary depending on where you local python libraries are installed. Amend as necessary.&lt;/p&gt;
+
+&lt;p&gt;And presto! you should be able to import and check the version of OpenCV from the python command line interpreter&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# nathan at nathan-macbook in ~ [23:51:55]&lt;/span&gt;
+→ python
+
+Python 2.7.12 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Jul 31 2016, 15:05:20&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 8.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-800.0.33.1&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
+Type &lt;span class=&quot;s2&quot;&gt;&quot;help&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;copyright&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;credits&quot;&lt;/span&gt; or &lt;span class=&quot;s2&quot;&gt;&quot;license&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more information.
+
+&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;import cv2
+&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;cv2.__version__
+&lt;span class=&quot;s1&quot;&gt;'3.1.0-dev'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Java is fairly similar and the libraries you’ll be working with can be found at the following location:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/local/opt/opencv3/share/OpenCV/java/opencv-310.jar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can include this library and utilize it in a similar fashion to python.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.opencv.core.Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;I am so unbelievably happy I managed to get this working after a painful month or so working out of a virtual machine…&lt;/p&gt;</content><category term="opencv" /><category term="sierra" /><category term="java" /><category term="python" /><summary>I have fought the good fight and feel the need to share the process I followed to fix my issues</summary></entry><entry><title>Angle mapping problem description</title><link href="https://handmap.github.io/angle-mapping-problem-description/" rel="alternate" type="text/html" title="Angle mapping problem description" /><published>2016-09-18T00:00:00+08:00</published><updated>2016-09-18T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-problem-description</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-problem-description/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;One of the problems I’m currently looking to solve is how I’m going to be mapping and calculating the angular offset from the wrist that the hand is bending at. The reason for investigating this particular issue came about whilst speaking with a contacts from PMH and the OT department at Curtin University.&lt;/p&gt;
@@ -1641,32 +1783,4 @@ Pixel at &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;270,214&lt;span class=&qu
 
 &lt;p&gt;scikit-image - &lt;a href=&quot;http://scikit-image.org/&quot;&gt;http://scikit-image.org/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;argparseg - &lt;a href=&quot;https://docs.python.org/3/library/argparse.html&quot;&gt;https://docs.python.org/3/library/argparse.html&lt;/a&gt;&lt;/p&gt;</content><category term="python" /><category term="opencv" /><summary>I delve deeper into OpenCV using the Python language and explore how it works at a lower level</summary></entry><entry><title>Project Introduction</title><link href="https://handmap.github.io/project-introduction/" rel="alternate" type="text/html" title="Project Introduction" /><published>2016-08-05T00:00:00+08:00</published><updated>2016-08-05T00:00:00+08:00</updated><id>https://handmap.github.io/project-introduction</id><content type="html" xml:base="https://handmap.github.io/project-introduction/">&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Hand Map is the title I’ve given the project I’m currently in the process of implementing for my final year Computer Systems and Networking project with Curtin University.&lt;/p&gt;
-
-&lt;p&gt;The goal is to create an accessible way for people living with cerebral palsy to generate their own splint sketch files that could be 3D printed; saving them regular trips to specialised medical centers.&lt;/p&gt;
-
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;The requirements for this project will be fairly dynamic, as the expected deliverable’s will change depending on how smoothly the early stages of the project go.&lt;/p&gt;
-
-&lt;p&gt;Current requirement are as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Hand Detection&lt;/li&gt;
-  &lt;li&gt;Object Detection&lt;/li&gt;
-  &lt;li&gt;Hand Mapping based on Object’s position on Hand&lt;/li&gt;
-  &lt;li&gt;3D Restructure of Hand model from 2D Images&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;special-thanks&quot;&gt;Special Thanks&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Halve Jekyll Theme: &lt;a href=&quot;https://github.com/TaylanTatli/Halve&quot;&gt;https://github.com/TaylanTatli/Halve&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Jekyll: &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;https://jekyllrb.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Github Pages: &lt;a href=&quot;https://pages.github.com/&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;</content><category term="project" /><summary>An introduction and breakdown of what is required for this project to be successful</summary></entry></feed>
+&lt;p&gt;argparseg - &lt;a href=&quot;https://docs.python.org/3/library/argparse.html&quot;&gt;https://docs.python.org/3/library/argparse.html&lt;/a&gt;&lt;/p&gt;</content><category term="python" /><category term="opencv" /><summary>I delve deeper into OpenCV using the Python language and explore how it works at a lower level</summary></entry></feed>
