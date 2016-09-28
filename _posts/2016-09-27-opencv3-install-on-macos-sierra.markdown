@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OpenCV3.1 install on MacOS Sierra"
+title: "OpenCV 3.x install on macOS Sierra"
 date: 2016-09-27
 excerpt: I have fought the good fight and feel the need to share the process I followed to fix my issues
 tags:
@@ -13,7 +13,7 @@ tags:
 ## Problem
 ---
 
-So for the past month and a half I have battled furiously with getting OpenCV installed on my Macbook Pro that I accidentally upgraded to Sierra on.
+So for the past month and a half I have battled furiously with getting OpenCV 3.x installed on my Macbook Pro that I accidentally upgraded to Sierra on.
 
 ```bash
 #import <QTKit/QTKit.h>
@@ -30,14 +30,14 @@ I'm not alone with troubles as it seems that some of the core video/image access
 ## Solution
 ---
 
-So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven't quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing openCV3 with the following arguments
+So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven't quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing OpenCV with the following arguments
 
 ```bash
 brew tap homebrew/science
 brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
 ```
 
-You can omit the `--with-python3` and `--with-java` off the end if you don't want it installed for python3 or java, however there's no harm having it built. You might just want to make sure you've got your python path registered with homebrew.
+You can omit the `--with-python3` and `--with-java` off the end if you don't want it installed for Python3.x or java, however there's no harm having it built. You might just want to make sure you've got your Python path registered with Homebrew.
 
 Below is a list of other arguements that are available if you see fit:
 
@@ -101,9 +101,9 @@ Below is a list of other arguements that are available if you see fit:
 	Install HEAD version
 ```
 
-I would highly recommend installing and symlinking python2 and python3 with brew instead, as it'll keep things neat and tidy.
+I would highly recommend installing and symlinking Python2.x and Python3.x with brew instead, as it'll keep things neat and tidy.
 
-Once you've successfully installed OpenCV3 you'll needed to symlink a couple paths for your python2 and python3 libraries. This is done with the following commands
+Once you've successfully installed OpenCV 3.x you'll needed to symlink a couple paths for your Python2.x and Python3.x libraries. This is done with the following commands
 
 ```bash
 ## Python 2.7

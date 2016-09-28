@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-28T01:07:13+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>OpenCV3.1 install on MacOS Sierra</title><link href="https://handmap.github.io/opencv3-install-on-macos-sierra/" rel="alternate" type="text/html" title="OpenCV3.1 install on MacOS Sierra" /><published>2016-09-27T00:00:00+08:00</published><updated>2016-09-27T00:00:00+08:00</updated><id>https://handmap.github.io/opencv3-install-on-macos-sierra</id><content type="html" xml:base="https://handmap.github.io/opencv3-install-on-macos-sierra/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-09-28T10:53:49+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>OpenCV 3.x install on macOS Sierra</title><link href="https://handmap.github.io/opencv3-install-on-macos-sierra/" rel="alternate" type="text/html" title="OpenCV 3.x install on macOS Sierra" /><published>2016-09-27T00:00:00+08:00</published><updated>2016-09-27T00:00:00+08:00</updated><id>https://handmap.github.io/opencv3-install-on-macos-sierra</id><content type="html" xml:base="https://handmap.github.io/opencv3-install-on-macos-sierra/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;So for the past month and a half I have battled furiously with getting OpenCV installed on my Macbook Pro that I accidentally upgraded to Sierra on.&lt;/p&gt;
+&lt;p&gt;So for the past month and a half I have battled furiously with getting OpenCV 3.x installed on my Macbook Pro that I accidentally upgraded to Sierra on.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;QTKit/QTKit.h&amp;gt;&lt;/span&gt;
         ^
@@ -18,14 +18,14 @@ make: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&qu
 &lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven’t quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing openCV3 with the following arguments&lt;/p&gt;
+&lt;p&gt;So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven’t quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing OpenCV with the following arguments&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew tap homebrew/science
 brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;You can omit the &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-python3&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-java&lt;/code&gt; off the end if you don’t want it installed for python3 or java, however there’s no harm having it built. You might just want to make sure you’ve got your python path registered with homebrew.&lt;/p&gt;
+&lt;p&gt;You can omit the &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-python3&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-java&lt;/code&gt; off the end if you don’t want it installed for Python3.x or java, however there’s no harm having it built. You might just want to make sure you’ve got your Python path registered with Homebrew.&lt;/p&gt;
 
 &lt;p&gt;Below is a list of other arguements that are available if you see fit:&lt;/p&gt;
 
@@ -89,9 +89,9 @@ brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;I would highly recommend installing and symlinking python2 and python3 with brew instead, as it’ll keep things neat and tidy.&lt;/p&gt;
+&lt;p&gt;I would highly recommend installing and symlinking Python2.x and Python3.x with brew instead, as it’ll keep things neat and tidy.&lt;/p&gt;
 
-&lt;p&gt;Once you’ve successfully installed OpenCV3 you’ll needed to symlink a couple paths for your python2 and python3 libraries. This is done with the following commands&lt;/p&gt;
+&lt;p&gt;Once you’ve successfully installed OpenCV 3.x you’ll needed to symlink a couple paths for your Python2.x and Python3.x libraries. This is done with the following commands&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Python 2.7&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; /usr/local/opt/opencv3/lib/python2.7/site-packages &amp;gt;&amp;gt; /usr/local/lib/python2.7/site-packages/opencv3.pth
