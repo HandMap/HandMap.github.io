@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-16T22:08:42+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Angle mapping w/ HSV detection</title><link href="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/" rel="alternate" type="text/html" title="Angle mapping w/ HSV detection" /><published>2016-10-16T00:00:00+08:00</published><updated>2016-10-16T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-16T23:14:35+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Angle mapping w/ HSV detection</title><link href="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/" rel="alternate" type="text/html" title="Angle mapping w/ HSV detection" /><published>2016-10-16T00:00:00+08:00</published><updated>2016-10-16T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I set to work on the Angle mapping process of my project. The goal for today was to have two objects detected then to draw a straight line between them and calculate the resulting angle.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-10-16/opencv-angle-tracking.png&quot; alt=&quot;Angle Tracking&quot; /&gt;
+
+  &lt;figcaption&gt;Angle Tracking&lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;The work done in this section will hopefully be very fundamental to the problem I’m looking to solve, so I tried to keep as much of it documented as possible.&lt;/p&gt;
 

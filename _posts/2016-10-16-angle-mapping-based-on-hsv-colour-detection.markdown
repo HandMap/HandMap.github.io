@@ -14,6 +14,15 @@ tags:
 
 Today I set to work on the Angle mapping process of my project. The goal for today was to have two objects detected then to draw a straight line between them and calculate the resulting angle.
 
+{% capture fig_img %}
+![Angle Tracking]({{ site.url }}/images/posts/2016-10-16/opencv-angle-tracking.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>Angle Tracking</figcaption>
+</figure>
+
 The work done in this section will hopefully be very fundamental to the problem I'm looking to solve, so I tried to keep as much of it documented as possible.
 
 ## Final Code
