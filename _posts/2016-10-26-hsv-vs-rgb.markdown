@@ -1,0 +1,64 @@
+---
+layout: post
+title: "HSV vs. RGB"
+date: 2016-10-26
+excerpt: I got tired of not really understanding why HSV was performing better for me over RGB... So I did some digging!
+tags:
+- RGB
+- HSV
+---
+
+## Introduction
+---
+
+During a previous post I transitioned from using an RGB detection method to a HSV one. At the time I didn't really understand why it worked more effectively so I just went along with what I was reading and told myself I would come back to it if an issue arose where I really needed to understand. 
+
+Well that time has come, particularly when I started trying to work with Yellow/Neon objects like the block sensor seen below.
+
+{% capture fig_img %}
+![Lego brick sensor]({{ site.url }}/images/posts/2016-10-26/opencv-hand-blocks.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>Lego brick sensor</figcaption>
+</figure>
+
+
+## Practical Example
+---
+
+I found a really well written explanation regarding why it's so much easier to perform colour detection with HSV in a response to a post by [penelope](http://dsp.stackexchange.com/a/2689). Take a look at the stop sign pictured below:
+
+{% capture fig_img %}
+![Shadowed Stop Sign]({{ site.url }}/images/posts/2016-10-26/stop-sign-shadowing.jpg)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>Shadowed stop sign</figcaption>
+</figure>
+
+If we wanted to detect the stop sign in the image above, the first thing you'd think of trying is to try and scan for the colour red, or (255, 0, 0) in RGB. However this RGB value is extremely specific so the chances of actually finding true red in the image is extremely unlikely.
+
+Next you might think to yourself, Ok well I'll instead search for the colour red in a range of RGB values and just change the R (130, 0, 0) -> (255, 0, 0). However this doesn't really solve the problem because most of the colour red in the stop sign image is still a mix of all three primary colours
+
+{% capture fig_img %}
+![RGB Red colour example]({{ site.url }}/images/posts/2016-10-26/stop-sign-red-rgb.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>RGB Red colour example</figcaption>
+</figure>
+
+So at this point we could continue going doesn this path, changing the RGB range for all three primary colour values; but it honestly requires a lot of effort to cover all our bases and even if somehow we do manage to get a reasonable range setup it's very likely we'll end up with a lot of noise in the fields we detect.
+
+## References
+---
+
+Why do we use the HSV colour space so often in vision and image processing? - [http://dsp.stackexchange.com/questions/2687/why-do-we-use-the-hsv-colour-space-so-often-in-vision-and-image-processing](http://dsp.stackexchange.com/questions/2687/why-do-we-use-the-hsv-colour-space-so-often-in-vision-and-image-processing)
+
+A Little About Color: HSV vs. RGB - [https://www.kirupa.com/design/little_about_color_hsv_rgb.htm](https://www.kirupa.com/design/little_about_color_hsv_rgb.htm)
+
+Color Filtering - OpenCV - [https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq](https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq)
