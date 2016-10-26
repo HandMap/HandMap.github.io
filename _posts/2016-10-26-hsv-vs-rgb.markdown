@@ -52,7 +52,87 @@ Next you might think to yourself, Ok well I'll instead search for the colour red
   <figcaption>RGB Red colour example</figcaption>
 </figure>
 
-So at this point we could continue going doesn this path, changing the RGB range for all three primary colour values; but it honestly requires a lot of effort to cover all our bases and even if somehow we do manage to get a reasonable range setup it's very likely we'll end up with a lot of noise in the fields we detect.
+So at this point we could continue going down this path, changing the RGB range for all three primary colour values; but it honestly requires a lot of effort to cover all our bases and even if somehow we do manage to get a reasonable range setup it's very likely we'll end up with a lot of noise in the fields we detect.
+
+We need a method that doesn't have to many parameters in order to simplify our detection space. This is where HSV comes into the picture (excuse the pun).
+
+## Comparison
+---
+
+Let me quickly go over how colour is represented in each of the colour spaces.
+
+### RGB
+---
+
+RGB is defined by listing how much red, green and blue is contained in a single value. It uses an additive method where the more of each colour is added, the brighter it becomes.
+
+{% capture fig_img %}
+![RGB]({{ site.url }}/images/posts/2016-10-26/opencv-rgb-diagram.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>RGB Colour Space</figcaption>
+</figure>
+
+When you are looking at a particular colour it's extremely difficult to arbitrarily dictate how much of each primary colour composes it.
+
+### HSV
+---
+
+HSV on the other hand uses three paramters to describe colour:
+
+1. Hue
+2. Saturation
+3. Value
+
+{% capture fig_img %}
+![HSV]({{ site.url }}/images/posts/2016-10-26/opencv-hsv-cone.jpg)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>HSV Colour Space</figcaption>
+</figure>
+
+With HSV with we now describe our colour using a much more cement method as we only theoretically need to transform the Hue to capture the 'red' like colour.
+
+OpenCV uses the following ranges to represent each of the parameters in the HSV spectrum
+
+1. Hue: [0, 179]
+2. Saturation [0, 255]
+3. Value [0, 255]
+
+Looking at the red colour ranges we used in the previous post:
+
+```cpp
+min_red = cv::Scalar(0,150,150);
+max_red = cv::Scalar(10,255,255);
+```
+
+We produce the following range for the low Hue value
+
+{% capture fig_img %}
+![Red Low Hue]({{ site.url }}/images/posts/2016-10-26/hsv-colour-plot-red-low.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>Red - Low Hue</figcaption>
+</figure>
+
+And the following is produced for the high Hue value
+
+{% capture fig_img %}
+![Red High Hue]({{ site.url }}/images/posts/2016-10-26/hsv-colour-plot-red-high.png)
+{% endcapture %}
+
+<figure>
+  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+  <figcaption>Red - High Hue</figcaption>
+</figure>
+
+Obviously it's still not completely perfect as we capture a fair amount of Orange with this range as well. But It allows us to target a huge set of red-like colours in a specific range without too much overall noise.
 
 ## References
 ---
@@ -62,3 +142,7 @@ Why do we use the HSV colour space so often in vision and image processing? - [h
 A Little About Color: HSV vs. RGB - [https://www.kirupa.com/design/little_about_color_hsv_rgb.htm](https://www.kirupa.com/design/little_about_color_hsv_rgb.htm)
 
 Color Filtering - OpenCV - [https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq](https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq)
+
+HSV inRange Colour Plot - [http://answers.opencv.org/question/28899/correct-hsv-inrange-values-for-red-objects/](http://answers.opencv.org/question/28899/correct-hsv-inrange-values-for-red-objects/)
+
+OpenCV Colour Plot Code hosting - [https://github.com/HandMap/openCVColourPlot](https://github.com/HandMap/openCVColourPlot)

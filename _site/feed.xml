@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-26T01:17:22+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-26T11:48:08+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;During a previous post I transitioned from using an RGB detection method to a HSV one. At the time I didn’t really understand why it worked more effectively so I just went along with what I was reading and told myself I would come back to it if an issue arose where I really needed to understand.&lt;/p&gt;
@@ -35,7 +35,83 @@
   &lt;figcaption&gt;RGB Red colour example&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;So at this point we could continue going doesn this path, changing the RGB range for all three primary colour values; but it honestly requires a lot of effort to cover all our bases and even if somehow we do manage to get a reasonable range setup it’s very likely we’ll end up with a lot of noise in the fields we detect.&lt;/p&gt;
+&lt;p&gt;So at this point we could continue going down this path, changing the RGB range for all three primary colour values; but it honestly requires a lot of effort to cover all our bases and even if somehow we do manage to get a reasonable range setup it’s very likely we’ll end up with a lot of noise in the fields we detect.&lt;/p&gt;
+
+&lt;p&gt;We need a method that doesn’t have to many parameters in order to simplify our detection space. This is where HSV comes into the picture (excuse the pun).&lt;/p&gt;
+
+&lt;h2 id=&quot;comparison&quot;&gt;Comparison&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Let me quickly go over how colour is represented in each of the colour spaces.&lt;/p&gt;
+
+&lt;h3 id=&quot;rgb&quot;&gt;RGB&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;RGB is defined by listing how much red, green and blue is contained in a single value. It uses an additive method where the more of each colour is added, the brighter it becomes.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-10-26/opencv-rgb-diagram.png&quot; alt=&quot;RGB&quot; /&gt;
+
+  &lt;figcaption&gt;RGB Colour Space&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;When you are looking at a particular colour it’s extremely difficult to arbitrarily dictate how much of each primary colour composes it.&lt;/p&gt;
+
+&lt;h3 id=&quot;hsv&quot;&gt;HSV&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;HSV on the other hand uses three paramters to describe colour:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hue&lt;/li&gt;
+  &lt;li&gt;Saturation&lt;/li&gt;
+  &lt;li&gt;Value&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-10-26/opencv-hsv-cone.jpg&quot; alt=&quot;HSV&quot; /&gt;
+
+  &lt;figcaption&gt;HSV Colour Space&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;With HSV with we now describe our colour using a much more cement method as we only theoretically need to transform the Hue to capture the ‘red’ like colour.&lt;/p&gt;
+
+&lt;p&gt;OpenCV uses the following ranges to represent each of the parameters in the HSV spectrum&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hue: [0, 179]&lt;/li&gt;
+  &lt;li&gt;Saturation [0, 255]&lt;/li&gt;
+  &lt;li&gt;Value [0, 255]&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Looking at the red colour ranges we used in the previous post:&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;min_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;max_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We produce the following range for the low Hue value&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-10-26/hsv-colour-plot-red-low.png&quot; alt=&quot;Red Low Hue&quot; /&gt;
+
+  &lt;figcaption&gt;Red - Low Hue&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;And the following is produced for the high Hue value&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2016-10-26/hsv-colour-plot-red-high.png&quot; alt=&quot;Red High Hue&quot; /&gt;
+
+  &lt;figcaption&gt;Red - High Hue&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Obviously it’s still not completely perfect as we capture a fair amount of Orange with this range as well. But It allows us to target a huge set of red-like colours in a specific range without too much overall noise.&lt;/p&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 &lt;hr /&gt;
@@ -44,7 +120,11 @@
 
 &lt;p&gt;A Little About Color: HSV vs. RGB - &lt;a href=&quot;https://www.kirupa.com/design/little_about_color_hsv_rgb.htm&quot;&gt;https://www.kirupa.com/design/little_about_color_hsv_rgb.htm&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Color Filtering - OpenCV - &lt;a href=&quot;https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq&quot;&gt;https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq&lt;/a&gt;&lt;/p&gt;</content><category term="RGB" /><category term="HSV" /><summary>I got tired of not really understanding why HSV was performing better for me over RGB... So I did some digging!</summary></entry><entry><title>Angle mapping w/ HSV detection</title><link href="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/" rel="alternate" type="text/html" title="Angle mapping w/ HSV detection" /><published>2016-10-16T00:00:00+08:00</published><updated>2016-10-16T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Color Filtering - OpenCV - &lt;a href=&quot;https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq&quot;&gt;https://youtu.be/CCOXg75HkvM?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;HSV inRange Colour Plot - &lt;a href=&quot;http://answers.opencv.org/question/28899/correct-hsv-inrange-values-for-red-objects/&quot;&gt;http://answers.opencv.org/question/28899/correct-hsv-inrange-values-for-red-objects/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;OpenCV Colour Plot Code hosting - &lt;a href=&quot;https://github.com/HandMap/openCVColourPlot&quot;&gt;https://github.com/HandMap/openCVColourPlot&lt;/a&gt;&lt;/p&gt;</content><category term="RGB" /><category term="HSV" /><summary>I got tired of not really understanding why HSV was performing better for me over RGB... So I did some digging!</summary></entry><entry><title>Angle mapping w/ HSV detection</title><link href="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/" rel="alternate" type="text/html" title="Angle mapping w/ HSV detection" /><published>2016-10-16T00:00:00+08:00</published><updated>2016-10-16T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-based-on-hsv-colour-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I set to work on the Angle mapping process of my project. The goal for today was to have two objects detected then to draw a straight line between them and calculate the resulting angle.&lt;/p&gt;
