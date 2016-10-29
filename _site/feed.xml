@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-26T11:48:08+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-29T16:04:53+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Video 3 - Progress Report</title><link href="https://handmap.github.io/video-3-progress-report/" rel="alternate" type="text/html" title="Video 3 - Progress Report" /><published>2016-10-29T00:00:00+08:00</published><updated>2016-10-29T00:00:00+08:00</updated><id>https://handmap.github.io/video-3-progress-report</id><content type="html" xml:base="https://handmap.github.io/video-3-progress-report/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/dRqSkR4ENAg&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 3</summary></entry><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;During a previous post I transitioned from using an RGB detection method to a HSV one. At the time I didn’t really understand why it worked more effectively so I just went along with what I was reading and told myself I would come back to it if an issue arose where I really needed to understand.&lt;/p&gt;
@@ -1319,90 +1319,4 @@ Type &lt;span class=&quot;s2&quot;&gt;&quot;help&quot;&lt;/span&gt;, &lt;span cl
 
 &lt;p&gt;OpenCV and Python Color Detection - &lt;a href=&quot;http://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/&quot;&gt;http://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;boundedRGB - &lt;a href=&quot;https://github.com/HandMap/boundedRGB&quot;&gt;https://github.com/HandMap/boundedRGB&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="rgb" /><category term="colour" /><summary>Looking into Object detection based on RGB colour values. I use RGB boundaries are my delimiter to cut down on objects that don't belong in the scene</summary></entry><entry><title>Video 1 - Project Overview</title><link href="https://handmap.github.io/video-1-project-overview/" rel="alternate" type="text/html" title="Video 1 - Project Overview" /><published>2016-08-27T00:00:00+08:00</published><updated>2016-08-27T00:00:00+08:00</updated><id>https://handmap.github.io/video-1-project-overview</id><content type="html" xml:base="https://handmap.github.io/video-1-project-overview/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/y94tOSxF8jw&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 1</summary></entry><entry><title>‘Handy’ GestureAPI</title><link href="https://handmap.github.io/handy-gesture-api/" rel="alternate" type="text/html" title="'Handy' GestureAPI" /><published>2016-08-24T00:00:00+08:00</published><updated>2016-08-24T00:00:00+08:00</updated><id>https://handmap.github.io/handy-gesture-api</id><content type="html" xml:base="https://handmap.github.io/handy-gesture-api/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Today while researching approaches for quick Hand mapping using contours I came across a fantastic example in the form of a simple API by a young man named &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;Vasu Agrawal&lt;/a&gt;. Not only was his code a wealth of interesting examples but he also included some fantastic documentation that he kept whilst working on his Gesture tracking project at Carnegie Mellon University.&lt;/p&gt;
-
-&lt;p&gt;My goal tonight is to utilize his API and explore how he has overcome some of the problems I’ve been faced with when implementing some of my image processing methods from the previous posts.&lt;/p&gt;
-
-&lt;h2 id=&quot;converting-from-opencv2x-to-3x&quot;&gt;Converting from OpenCV2.x to 3.x&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;One of the first problems I needed to overcome was relating to the version of OpenCV Vasu had used when working on this project a few years back. I’m targetting OpenCV version 3+ whilst his API was written for OpenCV2.x.&lt;/p&gt;
-
-&lt;p&gt;The first issue in the code came from Lines 15 and 16 in &lt;code class=&quot;highlighter-rouge&quot;&gt;GesturesApi.py&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_CAP_PROP_FRAME_WIDTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_CAP_PROP_FRAME_HEIGHT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Both cv.CV_CAP_PROP_FRAME_WIDTH and HEIGHT respectively are not valid variables in the new version of OpenCV. To correct this problem I referenced the API docs for the &lt;a href=&quot;http://docs.opencv.org/3.1.0/d8/dfe/classcv_1_1VideoCapture.html&quot;&gt;VideoCapture.set() function&lt;/a&gt; and found that I simply needed to make the following modifications to update support for OpenCV3.x&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAP_PROP_FRAME_WIDTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CAP_PROP_FRAME_HEIGHT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cameraHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The second and last issue was with the findContours() method in &lt;code class=&quot;highlighter-rouge&quot;&gt;GesturesApi.py&lt;/code&gt; on lines 118 through 120.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findContours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thresholded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RETR_TREE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAIN_APPROX_SIMPLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Interestingly enough this was an issue I’d already dealt with previously so I knew the fix was to ammend a &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; before the &lt;code class=&quot;highlighter-rouge&quot;&gt;self.contours&lt;/code&gt; return variable. This is because in OpenCV2.x findContours() would only return two variables whereas now in &lt;a href=&quot;http://docs.opencv.org/3.0-beta/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontours#cv2.findContours&quot;&gt;OpenCV3.x&lt;/a&gt; we are returned the original input image along with the contours and hierarchy&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findContours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thresholded&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RETR_TREE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                    &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CHAIN_APPROX_SIMPLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;testing-bundled-example&quot;&gt;Testing bundled Example&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;After ironing out the bugs from updating, I ran the code and was amazed by the results. Below is an example of what I was able to capture with my webcam facing my flat hand.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/nathan-hand-base-test.png&quot; alt=&quot;Flat Hand Detect&quot; /&gt;
-
-  &lt;figcaption&gt;Flat Hand Detect&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The results were great! but there’s a catch, It only works well in very specific conditions. For example, practically any light throws the entire process out of whack.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/nathan-hand-poor-test.png&quot; alt=&quot;Poor Hand Detect&quot; /&gt;
-
-  &lt;figcaption&gt;Poor Hand Detect&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The final thing I tested was how it handled by Partners hand. She is living with cerebral palsy and more specifically deals with flexion, or abnormal bending at the wrist or of the fingers, due to muscle spasticity on a daily basis. This means her hand won’t always be in a shape that is easily analysed, so I really wanted to know how the current algorithm handle the hand matching.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-08-24/yhana-hand-cp-test.png&quot; alt=&quot;Flexion Hand Detect&quot; /&gt;
-
-  &lt;figcaption&gt;Flexion Hand Detect&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;The results of the test were very interesting as it looks like the center point of the hand isn’t calculated correctly due to the abrupt direction particular parts of the hand make. I do have the advantage of being able to utilize a small &lt;code class=&quot;highlighter-rouge&quot;&gt;lego brick style&lt;/code&gt; censor that will be placed on the hand during 3D capture. So hopefully I’ll be able to use this as a easy to identify point of reference.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;At this stage I’m really happy with the potential this API will offer. Huge thanks to &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;Vasu Agrawal&lt;/a&gt; again, seriously awesome work. I’m managing my own fork of the code base &lt;a href=&quot;https://github.com/HandMap/GestureDetection&quot;&gt;here&lt;/a&gt; that anyone can contribute to if they want.&lt;/p&gt;
-
-&lt;p&gt;Plans for next time will be augment my own ideas with the GestureApi core library and also make sure I can use a small &lt;code class=&quot;highlighter-rouge&quot;&gt;lego-like&lt;/code&gt; block as a reference point (haar classification will probably be the way I go).&lt;/p&gt;
-
-&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Spastic cerebral palsy - &lt;a href=&quot;https://www.cerebralpalsy.org.au/what-is-cerebral-palsy/types-of-cerebral-palsy/spastic-cerebral-palsy/&quot;&gt;https://www.cerebralpalsy.org.au/what-is-cerebral-palsy/types-of-cerebral-palsy/spastic-cerebral-palsy/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;GestureDetection API - &lt;a href=&quot;https://github.com/VasuAgrawal/GestureDetection&quot;&gt;https://github.com/VasuAgrawal/GestureDetection&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="gestures" /><category term="api" /><summary>I found a fantastic project by Vasu Agrawal that was designed as a Gesture tracking system. I investigate it's portability for my project</summary></entry></feed>
+&lt;p&gt;boundedRGB - &lt;a href=&quot;https://github.com/HandMap/boundedRGB&quot;&gt;https://github.com/HandMap/boundedRGB&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="rgb" /><category term="colour" /><summary>Looking into Object detection based on RGB colour values. I use RGB boundaries are my delimiter to cut down on objects that don't belong in the scene</summary></entry><entry><title>Video 1 - Project Overview</title><link href="https://handmap.github.io/video-1-project-overview/" rel="alternate" type="text/html" title="Video 1 - Project Overview" /><published>2016-08-27T00:00:00+08:00</published><updated>2016-08-27T00:00:00+08:00</updated><id>https://handmap.github.io/video-1-project-overview</id><content type="html" xml:base="https://handmap.github.io/video-1-project-overview/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/y94tOSxF8jw&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 1</summary></entry></feed>
