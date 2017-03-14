@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2016-10-29T16:09:04+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Video 3 - Progress Report</title><link href="https://handmap.github.io/video-3-progress-report/" rel="alternate" type="text/html" title="Video 3 - Progress Report" /><published>2016-10-29T00:00:00+08:00</published><updated>2016-10-29T00:00:00+08:00</updated><id>https://handmap.github.io/video-3-progress-report</id><content type="html" xml:base="https://handmap.github.io/video-3-progress-report/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/zWmpUzUmY20&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 3</summary></entry><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2017-03-14T22:49:02+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>OpenCV colour tracking in Unity3D</title><link href="https://handmap.github.io/opencv-colour-tracking-unity3d/" rel="alternate" type="text/html" title="OpenCV colour tracking in Unity3D" /><published>2017-03-14T00:00:00+08:00</published><updated>2017-03-14T00:00:00+08:00</updated><id>https://handmap.github.io/opencv-colour-tracking-unity3d</id><content type="html" xml:base="https://handmap.github.io/opencv-colour-tracking-unity3d/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;All the work up to this point has been written in a way that makes it fairly easy to port to different platforms. However I realise that I haven’t properly tested whether or not I can get OpenCV working on the mobile platform.&lt;/p&gt;
+
+&lt;p&gt;This week I decided to see if I could get something up and running with OpenCV in Unity3D, and then deploy it to my Android device. This way I could tell whether I am being realistic with the scope of my project, and also whether or not mobile smartphones can iterate and process live camera video fast enough and without any latency.&lt;/p&gt;
+
+&lt;h2 id=&quot;opencv-for-unity3d&quot;&gt;OpenCV for Unity3D&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;There’s bads news and some less bad news… The bad news is that OpenCV as a platform, is just as difficult to get working on mobile as it is PC/Mac. The less bad news is that there is a &lt;a href=&quot;https://www.assetstore.unity3d.com/en/#!/content/21088&quot;&gt;paid package&lt;/a&gt; for OpenCV integration that I picked up a while ago on sale and abstracts out all the terrible integration difficulties while I’m just testing performance (Yay!)&lt;/p&gt;
+
+&lt;p&gt;I want to stress that this isn’t a permanent decision by me, and I only really want to use this package to test that the OpenCV libraries don’t overload my mobile device too badly.&lt;/p&gt;
+
+&lt;h3 id=&quot;colour-tracking-example&quot;&gt;Colour tracking example&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;There’s a neat demo that came packaged along side the OpenCV package for Unity3D that handles multiple object detection based on colour. The example can be tweeked to show how the device will handle a number of different thresholds including&lt;/p&gt;
+
+&lt;p&gt;MAX_NUMBER_OBJECTS:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;summary&amp;gt;
+/// max number of objects to be detected in frame
+/// &amp;lt;/summary&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAX_NUM_OBJECTS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;MIN_OBJECT_AREA:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;summary&amp;gt;
+/// minimum and maximum object area
+/// &amp;lt;/summary&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MIN_OBJECT_AREA&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It defines a number of different colour thresholds using a ColourObject helper class&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;red&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;green&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ColorObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;green&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The helper class simply takes the colour string and returns a ColorObject object containing some relevant details&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xPos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yPos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HSVmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HSVmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The colours themselves are defined within the ColourObject constructor in a simple switch statement&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//TODO: use &quot;calibration mode&quot; to find HSV min
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//and HSV max values
+&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;92&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmax&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;124&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//BGR value for Green:
+&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;setColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;green&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//TODO: use &quot;calibration mode&quot; to find HSV min
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//and HSV max values
+&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmax&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;220&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//BGR value for Yellow:
+&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;setColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//TODO: use &quot;calibration mode&quot; to find HSV min
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//and HSV max values
+&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;124&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmax&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//BGR value for Red:
+&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;setColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//TODO: use &quot;calibration mode&quot; to find HSV min
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//and HSV max values
+&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;setHSVmax&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//BGR value for Red:
+&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;setColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The overall result is remarkably good and while it doesn’t look like it’s terribly accurate, that’s just due to the original designers implementation being tuned to a different set of colour thresholds.&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2017-03-14/opencv-unity-colour-tracking.png&quot; alt=&quot;OpenCV Colour tracking in Unity3D&quot; /&gt;
+
+  &lt;figcaption&gt;OpenCV Colour tracking in Unity3D&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;what-i-learnt&quot;&gt;What I learnt&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;There are a couple key things I learnt from this short experiment, and I feel as though I really need to describe each of the points with a bit of detail:&lt;/p&gt;
+
+&lt;h3 id=&quot;position-in-frame&quot;&gt;Position in frame&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;I really like how the author of the library has created a class to handle the objects that it detects, which allowed him to store positional information about where in respect of the camera frame are the different objects.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;/// Here are the ints that store the location reletive to the screen size
+&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xPos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yPos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HSVmin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HSVmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Scalar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I plan to take this idea back to my Python and C++ code and see if I can come up with a less hackie solution for storing the points of interest that I am capturing&lt;/p&gt;
+
+&lt;h3 id=&quot;modularity&quot;&gt;Modularity&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;So far almost all my code have been reasonable size scripts with very little modularity. This was partially because of a lack of understand about Python classes and I really need to go back and clean up some of my implementations to be more portable.&lt;/p&gt;
+
+&lt;h3 id=&quot;processing-overhead-for-mobile&quot;&gt;Processing overhead for mobile&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;The overhead is a non-issue. It seems like most modern devices will easily be able to handle the processing overhead associated with computer vision. In the example I used a 50 object limit, and in some cases found it happily hitting that threshold without even stuttering&lt;/p&gt;
+
+&lt;figure&gt;
+  
+&lt;img src=&quot;https://handmap.github.io/images/posts/2017-03-14/opencv-unity-colour-tracking-kitchen.png&quot; alt=&quot;OpenCV Colour tracking in Kitchen&quot; /&gt;
+
+  &lt;figcaption&gt;OpenCV Colour tracking in Kitchen&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;OpenCV for Unity store page - &lt;a href=&quot;https://www.assetstore.unity3d.com/en/#!/content/21088&quot;&gt;https://www.assetstore.unity3d.com/en/#!/content/21088&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="android" /><category term="ios" /><category term="unity3d" /><summary>Curiosity got the better of me and I decided I wanted to make sure I could easily build a small application with OpenCV that would deploy onto an Android/iOS mobile device</summary></entry><entry><title>Video 3 - Progress Report</title><link href="https://handmap.github.io/video-3-progress-report/" rel="alternate" type="text/html" title="Video 3 - Progress Report" /><published>2016-10-29T00:00:00+08:00</published><updated>2016-10-29T00:00:00+08:00</updated><id>https://handmap.github.io/video-3-progress-report</id><content type="html" xml:base="https://handmap.github.io/video-3-progress-report/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/zWmpUzUmY20&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 3</summary></entry><entry><title>HSV vs. RGB</title><link href="https://handmap.github.io/hsv-vs-rgb/" rel="alternate" type="text/html" title="HSV vs. RGB" /><published>2016-10-26T00:00:00+08:00</published><updated>2016-10-26T00:00:00+08:00</updated><id>https://handmap.github.io/hsv-vs-rgb</id><content type="html" xml:base="https://handmap.github.io/hsv-vs-rgb/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;During a previous post I transitioned from using an RGB detection method to a HSV one. At the time I didn’t really understand why it worked more effectively so I just went along with what I was reading and told myself I would come back to it if an issue arose where I really needed to understand.&lt;/p&gt;
@@ -1319,4 +1477,4 @@ Type &lt;span class=&quot;s2&quot;&gt;&quot;help&quot;&lt;/span&gt;, &lt;span cl
 
 &lt;p&gt;OpenCV and Python Color Detection - &lt;a href=&quot;http://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/&quot;&gt;http://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;boundedRGB - &lt;a href=&quot;https://github.com/HandMap/boundedRGB&quot;&gt;https://github.com/HandMap/boundedRGB&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="rgb" /><category term="colour" /><summary>Looking into Object detection based on RGB colour values. I use RGB boundaries are my delimiter to cut down on objects that don't belong in the scene</summary></entry><entry><title>Video 1 - Project Overview</title><link href="https://handmap.github.io/video-1-project-overview/" rel="alternate" type="text/html" title="Video 1 - Project Overview" /><published>2016-08-27T00:00:00+08:00</published><updated>2016-08-27T00:00:00+08:00</updated><id>https://handmap.github.io/video-1-project-overview</id><content type="html" xml:base="https://handmap.github.io/video-1-project-overview/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/y94tOSxF8jw&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project update video 1</summary></entry></feed>
+&lt;p&gt;boundedRGB - &lt;a href=&quot;https://github.com/HandMap/boundedRGB&quot;&gt;https://github.com/HandMap/boundedRGB&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="rgb" /><category term="colour" /><summary>Looking into Object detection based on RGB colour values. I use RGB boundaries are my delimiter to cut down on objects that don't belong in the scene</summary></entry></feed>
