@@ -1,0 +1,276 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>dlib classification for use in object detection &#8211; Hand Map</title> <meta name="description" content="Today we train a classifier for use with the dlib framework and attempt to get hand detection working using this classification"> <meta name="keywords" content="dlib, opencv, object detection"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="dlib classification for use in object detection"> <meta name="twitter:description" content="Today we train a classifier for use with the dlib framework and attempt to get hand detection working using this classification"> <meta name="twitter:site" content="@nathangloverAUS"> <meta name="twitter:creator" content="@nathangloverAUS"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="dlib classification for use in object detection"> <meta property="og:description" content="Today we train a classifier for use with the dlib framework and attempt to get hand detection working using this classification"> <meta property="og:url" content="https://handmap.github.io/dlib-classifier-for-object-detection/"> <meta property="og:site_name" content="Hand Map"> <meta property="og:image" content="https://handmap.github.io/images/halve.png"> <link rel="canonical" href="https://handmap.github.io/dlib-classifier-for-object-detection/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="https://handmap.github.io/feed.xml" title="Hand Map" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="https://handmap.github.io/favicon.png" /> <link rel="shortcut icon" href="https://handmap.github.io/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="https://handmap.github.io/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://handmap.github.io/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://handmap.github.io/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(https://handmap.github.io/images/home.png) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="https://handmap.github.io" class="logo"><img src="https://handmap.github.io/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">dlib classification for use in object detection </h1> <ul class="tags"> <li><a href="https://handmap.github.io/tags#dlib">dlib</a></li> <li><a href="https://handmap.github.io/tags#opencv">opencv</a></li> <li><a href="https://handmap.github.io/tags#object detection">object detection</a></li> </ul> <div class="section-line reverse"><a href="https://handmap.github.io/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <div class="share-buttons"> <a href="https://twitter.com/intent/tweet?text=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> <a href="https://www.facebook.com/sharer/sharer.php?u=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a> <a href="https://plus.google.com/share?url=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a> </div> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">09 Apr 2017</div> <h2 id="introduction">Introduction</h2> <hr /> <p>Today I came across a new method of classification using machine learning utilizing a library called <a href="http://dlib.net/">dlib</a>. The justification for looking into this method this late into my design is due to the requirement of quickly detecting particular objects within the scene.</p> <h2 id="dlib-installation">dlib Installation</h2> <hr /> <p>The installation of dlib requires a couple of pre-requisites. I used the following guide from <a href="http://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/">Adrian Rosebrock</a> to get it all up and running, but i’ll outline the main issues I had below.</p> <h3 id="requirements">Requirements</h3> <hr /> <p>You’ll need python, python3, cmake, boost and boost-python</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew install python
+<span class="gp">$ </span>brew install python3
+<span class="gp">$ </span>brew install cmake
+<span class="gp">$ </span>brew install boost
+<span class="gp">$ </span>brew install boost-python --with-python3
+</code></pre></div> <p>Note that if you had a previously setup OpenCV instance there’s a very good chance that you’re python will be forced to upgrade python to the most recent version. This will mess up your original OpenCV binding… The way you can fix this is to reinstall OpenCV via brew.</p> <h4 id="reinstallre-setup-opencv">Reinstall/Re-setup OpenCV</h4> <hr /> <p>Check to confirm that your python installs are setup with brew. I would highly recommend that you don’t install it ontop of the Sierra python interpreter, so make sure it’s setup as per the following.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>which python
+/usr/local/bin/python
+<span class="gp">$ </span>which python3
+/usr/local/bin/python3
+</code></pre></div> <p>Confirm homebrew/science is tapped with brew</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew tap homebrew/science
+</code></pre></div> <p>If you have had an install of OpenCV prior to this, you will need to make a slight change to the opencv3 package currently configured with homebrew. The following fix is documented on the following <a href="http://stackoverflow.com/questions/43113151/error-in-installing-opencv3-with-homebrew-and-python3">page</a>. Run the following to open the opencv3 configuration.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew edit opencv3
+</code></pre></div> <p>Comment out the following command lines within the opened file</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code>inreplace buildpath/<span class="s2">"3rdparty/ippicv/downloader.cmake"</span>,
+  <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCV_ICV_PLATFORM</span><span class="k">}</span><span class="s2">-</span><span class="k">${</span><span class="nv">OPENCV_ICV_PACKAGE_HASH</span><span class="k">}</span><span class="s2">"</span>,
+  <span class="s2">"</span><span class="k">${</span><span class="nv">OPENCV_ICV_PLATFORM</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div> <p>Now run the following command to install the opencv3 package via brew. If you have an existing install you’ll need to use the –force trigger, if you don’t however there is no harm including it anyway.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew install --force opencv3 --with-contrib --with-python3 --HEAD
+</code></pre></div> <p>Once installed, relink the path to the new site-packages using the following commands for python2.7 and python3.6</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo</span> /usr/local/opt/opencv3/lib/python3.6/site-packages &gt;&gt; /usr/local/lib/python3.6/site-packages/opencv3.pth
+<span class="gp">$ </span><span class="nb">echo</span> /usr/local/opt/opencv3/lib/python2.7/site-packages &gt;&gt; /usr/local/lib/python2.7/site-packages/opencv3.pth
+</code></pre></div> <p>Run the following to confirm that OpenCV 3.2 is installed for both interpreters</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python
+<span class="gp">&gt;&gt;&gt; </span>import cv2
+<span class="gp">&gt;&gt;&gt; </span>cv2.__version__
+<span class="s1">'3.2.0-dev'</span>
+
+<span class="gp">$ </span>python3
+<span class="gp">&gt;&gt;&gt; </span>import cv2
+<span class="gp">&gt;&gt;&gt; </span>cv2.__version__
+<span class="s1">'3.2.0-dev'</span>
+</code></pre></div> <p>Also confirm that virtualenv and virtualenvwrapper is installed for both the newly confirmed interpreters.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>pip install virtualenv virtualenvwrapper
+<span class="gp">$ </span>pip3 install virtualenv virtualenvwrapper
+</code></pre></div> <p>Finally double check that you still have the virtualenvwrapper.sh source added to your ~/.bash_profile or ~/.zshrc</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># Virtualenv/VirtualenvWrapper</span>
+<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
+</code></pre></div> <h4 id="install-dlib-for-python-interpreters">Install dlib for python interpreters</h4> <hr /> <p>Create virtualenv’s for python and python3 for use with OpenCV 3.x</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkvirtualenv opencv3.2-python2.7.12
+<span class="gp">$ </span>mkvirtualenv opencv3.2-python3.6 -p python3
+</code></pre></div> <p>Within these virtualenv’s install dlib (and other useful libraries)</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>workon opencv3.2-python2.7.12
+
+<span class="o">(</span>opencv3.2-python2.7.12<span class="o">)</span> <span class="nv">$ </span>pip install numpy
+<span class="o">(</span>opencv3.2-python2.7.12<span class="o">)</span> <span class="nv">$ </span>pip install scipy
+<span class="o">(</span>opencv3.2-python2.7.12<span class="o">)</span> <span class="nv">$ </span>pip install scikit-image
+<span class="o">(</span>opencv3.2-python2.7.12<span class="o">)</span> <span class="nv">$ </span>pip install dlib
+
+<span class="gp">$ </span>workon opencv3.2-python3.6.1
+
+<span class="o">(</span>opencv3.2-python3.6.1<span class="o">)</span> <span class="nv">$ </span>pip install numpy
+<span class="o">(</span>opencv3.2-python3.6.1<span class="o">)</span> <span class="nv">$ </span>pip install scipy
+<span class="o">(</span>opencv3.2-python3.6.1<span class="o">)</span> <span class="nv">$ </span>pip install scikit-image
+<span class="o">(</span>opencv3.2-python3.6.1<span class="o">)</span> <span class="nv">$ </span>pip install dlib
+</code></pre></div> <h2 id="dlib-facial-landmarks">dlib Facial Landmarks</h2> <hr /> <p>I then proceeded to use an example tutorial from <a href="http://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/">Adrian Rosebrock</a> that detects and maps facial landmarks using a pre-generated classifier for facial detection.</p> <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># import the necessary packages</span>
+<span class="kn">from</span> <span class="nn">imutils</span> <span class="kn">import</span> <span class="n">face_utils</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">dlib</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c"># construct the argument parser and parse the arguments</span>
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-p"</span><span class="p">,</span> <span class="s">"--shape-predictor"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">help</span><span class="o">=</span><span class="s">"path to facial landmark predictor"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+<span class="c"># Video capture source</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c"># initialize dlib's face detector (HOG-based) and then create</span>
+<span class="c"># the facial landmark predictor</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">get_frontal_face_detector</span><span class="p">()</span>
+<span class="n">predictor</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">shape_predictor</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">"shape_predictor"</span><span class="p">])</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c"># Capture frame-by-frame</span>
+    <span class="n">ret</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+    <span class="c"># detect faces in the grayscale image</span>
+    <span class="n">rects</span> <span class="o">=</span> <span class="n">detector</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># loop over the face detections</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rects</span><span class="p">):</span>
+        <span class="c"># determine the facial landmarks for the face region, then</span>
+        <span class="c"># convert the facial landmark (x, y)-coordinates to a NumPy</span>
+        <span class="c"># array</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">predictor</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">face_utils</span><span class="o">.</span><span class="n">shape_to_np</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="c"># convert dlib's rectangle to a OpenCV-style bounding box</span>
+        <span class="c"># [i.e., (x, y, w, h)], then draw the face bounding box</span>
+        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">=</span> <span class="n">face_utils</span><span class="o">.</span><span class="n">rect_to_bb</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c"># show the face number</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s">"Face #{}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">),</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c"># loop over the (x, y)-coordinates for the facial landmarks</span>
+        <span class="c"># and draw them on the image</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">shape</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># show the output image with the face detections + facial landmarks</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">"Output"</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div> <p>To run the example, use the following command replacing the shape-predictor with the filename you have.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python facial_landmarks.py --shape-predictor shape_predictor_68_face_landmarks.dat
+</code></pre></div> <p>You can get the classification file from the dlib website here:</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code>http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+</code></pre></div> <p>The output you should expect is sometime as shown below. This is just the simple facial landmarks for any detected faces in the input image.</p> <figure> <img src="https://handmap.github.io/images/posts/2017-04-09/dlib-facial-detection.png" alt="dlib Facial Landmarks" /> <figcaption>dlib Facial Landmarks</figcaption> </figure> <h2 id="dlib-custom-classifier">dlib Custom Classifier</h2> <hr /> <p>The example above is well and good, but we need a method for hand detection, and the above example only covers facial landscaping. I now needed to investing how to generate my own classifier for hands.</p> <p>To start with I found a great dataset of hand images on the <a href="https://www.mutah.edu.jo/biometrix/hand-images-databases.html">Mutah website</a>. It has both datasets of high and low quality images.</p> <figure> <img src="https://handmap.github.io/images/posts/2017-04-09/dlib-hand-data-set.png" alt="dlib Hand Data Set" /> <figcaption>dlib Hand Data Set</figcaption> </figure> <p>For the case of this post i’ll just be using the low quality images as it will likely suit just fine for what I’m doing.</p> <p>The next step was to generate the XML file that would be used to generate my classifier. This could be done using the imglab tool available with the dlib repo. In order to use this tool I had to build it from source by using the following pipeline to pull the code repo and make the binary.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone git@github.com:davisking/dlib.git
+<span class="gp">$ </span><span class="nb">cd </span>dlib/tools/imglab
+<span class="gp">$ </span>mkdir build
+<span class="gp">$ </span><span class="nb">cd </span>build
+<span class="gp">$ </span>cmake ..
+<span class="gp">$ </span>cmake --build . --config Release
+</code></pre></div> <p>This will spit out a imglab binary in the <code class="highlighter-rouge">dlib/tools/imglab/build</code> directory</p> <p>I next created a new dlib-training repo that I could use to house all the images and imglab tool chains while I generate my detector.</p> <p>Within this repo I had the following folders and files:</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">## Stores images used for classification</span>
+/images/
+
+<span class="c">## Stores the imglab binary and other classifier output files</span>
+/tools/
+
+<span class="c">## python file used to generate the detector svm file</span>
+train_object_detector.py
+</code></pre></div> <p>First thing you’ll need to do is to generate the base XML dataset to be used. This can be done by running the following with the appropriate arguements on the imglab binary.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>./imglab -c hand-dataset.xml ../images
+</code></pre></div> <p>This command will generate a file called <code class="highlighter-rouge">hand-dataset.xml</code> based on the classifier images within the /images folder.</p> <p>Next run the following command to open up the graphical interface for the image classification.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>./imglab hand-dataset.xml
+</code></pre></div> <p>Still will open up a window that will have a list of all the input images for your classifier and allow you to draw a bounding box and add a label for the boxes to each image.</p> <figure> <img src="https://handmap.github.io/images/posts/2017-04-09/dlib-imglab-box-classification.png" alt="dlib Imglab Manual Classification" /> <figcaption>dlib Imglab Manual Classification</figcaption> </figure> <p>The steps required to manually classify the images can take quite some time, You should enter a name for the next box you are about to draw in the label field on the top and then whilst holding <code class="highlighter-rouge">Shift</code> click and drag a box around the important zones in your image.</p> <p>Then press the <code class="highlighter-rouge">Down arrow</code> to go to the next image. This process will take some time, but the more accurate you are whilst doing it the better and more broad your results will be.</p> <p>Once you’re done, simply <code class="highlighter-rouge">File&gt;Save</code> and you’ll original <code class="highlighter-rouge">hand-dataset.xml</code> will be modified with the more specific values for each image.</p> <p>Now make a copy of the <code class="highlighter-rouge">hand-dataset.xml</code> and <code class="highlighter-rouge">image_metadata_stylesheet.xsl</code> files into the /images folder and run the following python file to generate the final <code class="highlighter-rouge">detector.svm</code> classifier</p> <p>NOTE: this code is documented also at the following <a href="http://dlib.net/train_object_detector.py.html">URL</a>.</p> <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/python</span>
+<span class="c"># The contents of this file are in the public domain. See LICENSE_FOR_EXAMPLE_PROGRAMS.txt</span>
+<span class="c">#</span>
+<span class="c"># This example program shows how you can use dlib to make an object</span>
+<span class="c">#   detector for things like faces, pedestrians, and any other semi-rigid</span>
+<span class="c">#   object.  In particular, we go though the steps to train the kind of sliding</span>
+<span class="c">#   window object detector first published by Dalal and Triggs in 2005 in the</span>
+<span class="c">#   paper Histograms of Oriented Gradients for Human Detection.</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c"># COMPILING/INSTALLING THE DLIB PYTHON INTERFACE</span>
+<span class="c">#   You can install dlib using the command:</span>
+<span class="c">#       pip install dlib</span>
+<span class="c">#</span>
+<span class="c">#   Alternatively, if you want to compile dlib yourself then go into the dlib</span>
+<span class="c">#   root folder and run:</span>
+<span class="c">#       python setup.py install</span>
+<span class="c">#   or</span>
+<span class="c">#       python setup.py install --yes USE_AVX_INSTRUCTIONS</span>
+<span class="c">#   if you have a CPU that supports AVX instructions, since this makes some</span>
+<span class="c">#   things run faster.</span>
+<span class="c">#</span>
+<span class="c">#   Compiling dlib should work on any operating system so long as you have</span>
+<span class="c">#   CMake and boost-python installed.  On Ubuntu, this can be done easily by</span>
+<span class="c">#   running the command:</span>
+<span class="c">#       sudo apt-get install libboost-python-dev cmake</span>
+<span class="c">#</span>
+<span class="c">#   Also note that this example requires scikit-image which can be installed</span>
+<span class="c">#   via the command:</span>
+<span class="c">#       pip install scikit-image</span>
+<span class="c">#   Or downloaded from http://scikit-image.org/download.html.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="kn">import</span> <span class="nn">dlib</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+
+
+<span class="c"># In this example we are going to train a face detector based on the small</span>
+<span class="c"># faces dataset in the examples/faces directory.  This means you need to supply</span>
+<span class="c"># the path to this faces folder as a command line argument so we will know</span>
+<span class="c"># where it is.</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span>
+        <span class="s">"Give the path to the examples/faces directory as the argument to this "</span>
+        <span class="s">"program. For example, if you are in the python_examples folder then "</span>
+        <span class="s">"execute this program by running:</span><span class="se">\n</span><span class="s">"</span>
+        <span class="s">"    ./train_object_detector.py ../examples/faces"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">()</span>
+<span class="n">faces_folder</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c"># Now let's do the training.  The train_simple_object_detector() function has a</span>
+<span class="c"># bunch of options, all of which come with reasonable default values.  The next</span>
+<span class="c"># few lines goes over some of these options.</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">simple_object_detector_training_options</span><span class="p">()</span>
+<span class="c"># Since faces are left/right symmetric we can tell the trainer to train a</span>
+<span class="c"># symmetric detector.  This helps it get the most value out of the training</span>
+<span class="c"># data.</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_left_right_image_flips</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c"># The trainer is a kind of support vector machine and therefore has the usual</span>
+<span class="c"># SVM C parameter.  In general, a bigger C encourages it to fit the training</span>
+<span class="c"># data better but might lead to overfitting.  You must find the best C value</span>
+<span class="c"># empirically by checking how well the trained detector works on a test set of</span>
+<span class="c"># images you haven't trained on.  Don't just leave the value set at 5.  Try a</span>
+<span class="c"># few different C values and see what works best for your data.</span>
+<span class="n">options</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c"># Tell the code how many CPU cores your computer has for the fastest training.</span>
+<span class="n">options</span><span class="o">.</span><span class="n">num_threads</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">options</span><span class="o">.</span><span class="n">be_verbose</span> <span class="o">=</span> <span class="bp">True</span>
+
+
+<span class="n">training_xml_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">faces_folder</span><span class="p">,</span> <span class="s">"hand-dataset.xml"</span><span class="p">)</span>
+<span class="n">testing_xml_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">faces_folder</span><span class="p">,</span> <span class="s">"testing.xml"</span><span class="p">)</span>
+<span class="c"># This function does the actual training.  It will save the final detector to</span>
+<span class="c"># detector.svm.  The input is an XML file that lists the images in the training</span>
+<span class="c"># dataset and also contains the positions of the face boxes.  To create your</span>
+<span class="c"># own XML files you can use the imglab tool which can be found in the</span>
+<span class="c"># tools/imglab folder.  It is a simple graphical tool for labeling objects in</span>
+<span class="c"># images with boxes.  To see how to use it read the tools/imglab/README.txt</span>
+<span class="c"># file.  But for this example, we just use the training.xml file included with</span>
+<span class="c"># dlib.</span>
+<span class="n">dlib</span><span class="o">.</span><span class="n">train_simple_object_detector</span><span class="p">(</span><span class="n">training_xml_path</span><span class="p">,</span> <span class="s">"detector.svm"</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+
+
+<span class="c"># Now that we have a face detector we can test it.  The first statement tests</span>
+<span class="c"># it on the training data.  It will print(the precision, recall, and then)</span>
+<span class="c"># average precision.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>  <span class="c"># Print blank line to create gap from previous output</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Training accuracy: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">dlib</span><span class="o">.</span><span class="n">test_simple_object_detector</span><span class="p">(</span><span class="n">training_xml_path</span><span class="p">,</span> <span class="s">"detector.svm"</span><span class="p">)))</span>
+<span class="c"># However, to get an idea if it really worked without overfitting we need to</span>
+<span class="c"># run it on images it wasn't trained on.  The next line does this.  Happily, we</span>
+<span class="c"># see that the object detector works perfectly on the testing images.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Testing accuracy: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">dlib</span><span class="o">.</span><span class="n">test_simple_object_detector</span><span class="p">(</span><span class="n">testing_xml_path</span><span class="p">,</span> <span class="s">"detector.svm"</span><span class="p">)))</span>
+</code></pre></div> <p>This process will take quite some time depending on how many images you are using. Just be patient, you’ll see an output similar to the following for each iteration.</p> <div class="language-bash highlighter-rouge"><pre class="highlight"><code>Training with C: 5
+Training with epsilon: 0.01
+Training using 4 threads.
+Training with sliding window 78 pixels wide by 82 pixels tall.
+Training on both left and right flipped versions of images.
+objective:     148.947
+objective gap: 148.941
+risk:          29.7882
+risk gap:      29.7882
+num planes:    3
+iter:          1
+
+objective:     28.1685
+objective gap: 28.0654
+risk:          5.61313
+risk gap:      5.61308
+num planes:    4
+iter:          2
+
+objective:     31.862
+objective gap: 31.6868
+risk:          6.33742
+risk gap:      6.33735
+num planes:    5
+iter:          3
+</code></pre></div> <h2 id="dlib-hand-classifier">dlib Hand Classifier</h2> <hr /> <p>Now that we have our <code class="highlighter-rouge">detector.svm</code> we can use it to setup a very simple detector using the following python code.</p> <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">dlib</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c"># Now let's use the detector as you would in a normal application.  First we</span>
+<span class="c"># will load it from disk.</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">simple_object_detector</span><span class="p">(</span><span class="s">"detector.svm"</span><span class="p">)</span>
+
+<span class="c"># Video capture source</span>
+<span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c"># We can look at the HOG filter we learned.  It should look like a face.  Neat!</span>
+<span class="n">win_det</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">image_window</span><span class="p">()</span>
+<span class="n">win_det</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">detector</span><span class="p">)</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">image_window</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+    <span class="n">ret</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+    <span class="n">rects</span> <span class="o">=</span> <span class="n">detector</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rects</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Detection {}: Left: {} Top: {} Right: {} Bottom: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">k</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">left</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">top</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">right</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">bottom</span><span class="p">()))</span>
+
+    <span class="n">win</span><span class="o">.</span><span class="n">clear_overlay</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">add_overlay</span><span class="p">(</span><span class="n">rects</span><span class="p">)</span>
+</code></pre></div> <p>The output can be seen below and is fairly successful.</p> <figure> <img src="https://handmap.github.io/images/posts/2017-04-09/dlib-hand-detection-success.png" alt="dlib Hand Detection Success" /> <figcaption>dlib Hand Detection Success</figcaption> </figure> <p>You can also see that the position of the detected object is output in the terminal</p> <figure> <img src="https://handmap.github.io/images/posts/2017-04-09/dlib-hand-detection-console-output.png" alt="dlib Hand Detection Console" /> <figcaption>dlib Hand Detection Console</figcaption> </figure> <h2 id="references">References</h2> <hr /> <p>Facial landmarks with dlib, OpenCV, and Python - <a href="http://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/">http://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/</a></p> <p>Hand Images Databases - <a href="https://www.mutah.edu.jo/biometrix/hand-images-databases.html">https://www.mutah.edu.jo/biometrix/hand-images-databases.html</a></p> <p>dlib Training Object Detector - <a href="http://dlib.net/train_object_detector.py.html">http://dlib.net/train_object_detector.py.html</a></p> <br> <a href="https://twitter.com/intent/tweet?text=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a> <a href="https://www.facebook.com/sharer/sharer.php?u=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a> <a href="https://plus.google.com/share?url=https://handmap.github.io/dlib-classifier-for-object-detection/" class="btn btn_google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a> <nav class="pagination"> <a href="https://handmap.github.io/measuring-size-and-distance-opencv/" class="pagination_pager" title="Measuring size and distance with OpenCV ">previous</a> <a href="#" class="pagination_pager disabled">next</a> </nav> </div> </div> <!-- JS --> <script src="https://handmap.github.io/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(https://github.com/HandMap/HandMap.github.io/blob/master/images/project.jpg) center center no-repeat;"> <a href="https://handmap.github.io" class="inactive" target="_blank" rel="nofollow external"> <span> Hand Map Project <br><em>in progress</em> </span> </a> </li> </ul> </div> </body> </html>
