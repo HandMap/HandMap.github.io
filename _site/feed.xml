@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2017-04-09T19:41:42+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>dlib classification for use in object detection</title><link href="https://handmap.github.io/dlib-classifier-for-object-detection/" rel="alternate" type="text/html" title="dlib classification for use in object detection" /><published>2017-04-09T00:00:00+08:00</published><updated>2017-04-09T00:00:00+08:00</updated><id>https://handmap.github.io/dlib-classifier-for-object-detection</id><content type="html" xml:base="https://handmap.github.io/dlib-classifier-for-object-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2017-04-17T14:34:15+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Video 4 - Progress Plan</title><link href="https://handmap.github.io/video-4-progress-plan/" rel="alternate" type="text/html" title="Video 4 - Progress Plan" /><published>2017-04-17T00:00:00+08:00</published><updated>2017-04-17T00:00:00+08:00</updated><id>https://handmap.github.io/video-4-progress-plan</id><content type="html" xml:base="https://handmap.github.io/video-4-progress-plan/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/VA8v9zCDf1A&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project plan video 4</summary></entry><entry><title>dlib classification for use in object detection</title><link href="https://handmap.github.io/dlib-classifier-for-object-detection/" rel="alternate" type="text/html" title="dlib classification for use in object detection" /><published>2017-04-09T00:00:00+08:00</published><updated>2017-04-09T00:00:00+08:00</updated><id>https://handmap.github.io/dlib-classifier-for-object-detection</id><content type="html" xml:base="https://handmap.github.io/dlib-classifier-for-object-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I came across a new method of classification using machine learning utilizing a library called &lt;a href=&quot;http://dlib.net/&quot;&gt;dlib&lt;/a&gt;. The justification for looking into this method this late into my design is due to the requirement of quickly detecting particular objects within the scene.&lt;/p&gt;
@@ -1728,85 +1728,4 @@ Type &lt;span class=&quot;s2&quot;&gt;&quot;help&quot;&lt;/span&gt;, &lt;span cl
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;I am so unbelievably happy I managed to get this working after a painful month or so working out of a virtual machine…&lt;/p&gt;</content><category term="opencv" /><category term="sierra" /><category term="java" /><category term="python" /><summary>I have fought the good fight and feel the need to share the process I followed to fix my issues</summary></entry><entry><title>Angle mapping problem description</title><link href="https://handmap.github.io/angle-mapping-problem-description/" rel="alternate" type="text/html" title="Angle mapping problem description" /><published>2016-09-18T00:00:00+08:00</published><updated>2016-09-18T00:00:00+08:00</updated><id>https://handmap.github.io/angle-mapping-problem-description</id><content type="html" xml:base="https://handmap.github.io/angle-mapping-problem-description/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;One of the problems I’m currently looking to solve is how I’m going to be mapping and calculating the angular offset from the wrist that the hand is bending at. The reason for investigating this particular issue came about whilst speaking with a contacts from PMH and the OT department at Curtin University.&lt;/p&gt;
-
-&lt;p&gt;In the following post I’ll do my best to outline the problem and state a few of my assumptions as to keep a good record of my workings.&lt;/p&gt;
-
-&lt;h3 id=&quot;assumption-1---cube-sensor&quot;&gt;Assumption 1 - Cube Sensor&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;One of the key pieces of information I’m basing this description on is the idea that I’ll be able to extract positional and gravitational data from the various sensors inside of the Blue box. The piece of data that will be most helpful is a measurement telling me what direction gravity is pulling downwards.&lt;/p&gt;
-
-&lt;p&gt;The figure below gives an idea of the data expected to be supplied.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand.png&quot; alt=&quot;Hand Gravity&quot; /&gt;
-
-  &lt;figcaption&gt;Gravitational data from box sensor&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h3 id=&quot;assumption-2---high-point-on-hand&quot;&gt;Assumption 2 - High Point on Hand&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;The next assumption I’ll be making for now is that the peak point on the bent hand is where I’ll be taking the centered measurement. If I use this assumption I should be able to begin calculating the angles using a method outlined in the image below:&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand-aligned.png&quot; alt=&quot;Hand Gravity Transform&quot; /&gt;
-
-  &lt;figcaption&gt;Gravitational transform to centre point&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h3 id=&quot;assumption-3---box-transformation&quot;&gt;Assumption 3 - Box Transformation&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;The third assumption is that if I take half the height of the box and use it to construct an imaginatry replica of the current box at a given position down the arm, I’ll be able to use that as a reference point for my other angle. This angle would be the last piece of information I’d need to fairly accurately plot the bend in the hand/arm.&lt;/p&gt;
-
-&lt;figure&gt;
-  
-&lt;img src=&quot;https://handmap.github.io/images/posts/2016-09-18/angle-gravity-hand-box-transform.png&quot; alt=&quot;Box Transform&quot; /&gt;
-
-  &lt;figcaption&gt;Box transform idea&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;h2 id=&quot;possible-issues&quot;&gt;Possible Issues&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;problem-1&quot;&gt;Problem 1&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Unknown scale could lead to an issue where I can’t compute the angle because I don’t have any way of calculating the distance&lt;/p&gt;
-
-&lt;h3 id=&quot;solution-1&quot;&gt;Solution 1&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;Simply have a line(s) printed on the box with a length of exactly 1cm. This line could be used as a size/scaling reference point and used in the final calculations.&lt;/p&gt;
-
-&lt;h3 id=&quot;problem-2&quot;&gt;Problem 2&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;This method only works side on&lt;/p&gt;
-
-&lt;h3 id=&quot;solution-2&quot;&gt;Solution 2&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;The final implementation looks like it will require an image from the Top-down and Side-on. Means another method will be implemented for Size-on captures&lt;/p&gt;
-
-&lt;h3 id=&quot;problem-3&quot;&gt;Problem 3&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;What if the highest point on the hand isn’t the bend in the wrist?&lt;/p&gt;
-
-&lt;h3 id=&quot;solution-3&quot;&gt;Solution 3&lt;/h3&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;I don’t think I can use the ‘highest’ point per se. More than likely it will actually be that contour mapping and feature detection methods will identify the Pisiform (pointy bone on wrist) and that will be considered the primary axis.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;The above concept doesn’t really have much backing to it yet and I’ll still need to do the maths and work out if it makes sense technically. I’d also like to cover the mapping of the hand from the Top-down method and identify how that will work.&lt;/p&gt;</content><category term="angle" /><summary>I outline my interpretation of the angle mapping/calculation problem I'm currently working on for the project</summary></entry></feed>
+&lt;p&gt;I am so unbelievably happy I managed to get this working after a painful month or so working out of a virtual machine…&lt;/p&gt;</content><category term="opencv" /><category term="sierra" /><category term="java" /><category term="python" /><summary>I have fought the good fight and feel the need to share the process I followed to fix my issues</summary></entry></feed>
