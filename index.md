@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-# About Hand Map
+# About
 
 Hand Map is a project currently in the research phase by Nathan Glover of Curtin University.
 
