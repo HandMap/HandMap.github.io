@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Video 05 - Implementation and Testing"
+title: "Video 5 - Implementation and Testing"
 date: 2017-04-19
 excerpt: Implementation and testing video 5
 tags:
