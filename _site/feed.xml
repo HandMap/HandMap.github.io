@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2017-04-17T23:58:17+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>dlib classification for use in object detection</title><link href="https://handmap.github.io/dlib-classifier-for-object-detection/" rel="alternate" type="text/html" title="dlib classification for use in object detection" /><published>2017-04-09T00:00:00+08:00</published><updated>2017-04-09T00:00:00+08:00</updated><id>https://handmap.github.io/dlib-classifier-for-object-detection</id><content type="html" xml:base="https://handmap.github.io/dlib-classifier-for-object-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="https://handmap.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://handmap.github.io/" rel="alternate" type="text/html" /><updated>2017-04-19T14:57:58+08:00</updated><id>https://handmap.github.io/</id><title>Hand Map</title><subtitle>The Official Hand Map Project Blog</subtitle><entry><title>Video 05 - Implementation and Testing</title><link href="https://handmap.github.io/video-5-implementation-and-testing/" rel="alternate" type="text/html" title="Video 05 - Implementation and Testing" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>https://handmap.github.io/video-5-implementation-and-testing</id><content type="html" xml:base="https://handmap.github.io/video-5-implementation-and-testing/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/9g-y895Bgxc&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Implementation and testing video 5</summary></entry><entry><title>dlib classification for use in object detection</title><link href="https://handmap.github.io/dlib-classifier-for-object-detection/" rel="alternate" type="text/html" title="dlib classification for use in object detection" /><published>2017-04-09T00:00:00+08:00</published><updated>2017-04-09T00:00:00+08:00</updated><id>https://handmap.github.io/dlib-classifier-for-object-detection</id><content type="html" xml:base="https://handmap.github.io/dlib-classifier-for-object-detection/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today I came across a new method of classification using machine learning utilizing a library called &lt;a href=&quot;http://dlib.net/&quot;&gt;dlib&lt;/a&gt;. The justification for looking into this method this late into my design is due to the requirement of quickly detecting particular objects within the scene.&lt;/p&gt;
@@ -483,7 +483,7 @@ iter:          3
 
 &lt;p&gt;Hand Images Databases - &lt;a href=&quot;https://www.mutah.edu.jo/biometrix/hand-images-databases.html&quot;&gt;https://www.mutah.edu.jo/biometrix/hand-images-databases.html&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;dlib Training Object Detector - &lt;a href=&quot;http://dlib.net/train_object_detector.py.html&quot;&gt;http://dlib.net/train_object_detector.py.html&lt;/a&gt;&lt;/p&gt;</content><category term="dlib" /><category term="opencv" /><category term="object detection" /><summary>Today we train a classifier for use with the dlib framework and attempt to get hand detection working using this classification</summary></entry><entry><title>Video 4 - Progress Plan</title><link href="https://handmap.github.io/video-4-progress-plan/" rel="alternate" type="text/html" title="Video 4 - Progress Plan" /><published>2017-03-24T00:00:00+08:00</published><updated>2017-03-24T00:00:00+08:00</updated><id>https://handmap.github.io/video-4-progress-plan</id><content type="html" xml:base="https://handmap.github.io/video-4-progress-plan/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/VA8v9zCDf1A&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Project plan video 4</summary></entry><entry><title>Measuring size and distance with OpenCV</title><link href="https://handmap.github.io/measuring-size-and-distance-opencv/" rel="alternate" type="text/html" title="Measuring size and distance with OpenCV" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>https://handmap.github.io/measuring-size-and-distance-opencv</id><content type="html" xml:base="https://handmap.github.io/measuring-size-and-distance-opencv/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;dlib Training Object Detector - &lt;a href=&quot;http://dlib.net/train_object_detector.py.html&quot;&gt;http://dlib.net/train_object_detector.py.html&lt;/a&gt;&lt;/p&gt;</content><category term="dlib" /><category term="opencv" /><category term="object detection" /><summary>Today we train a classifier for use with the dlib framework and attempt to get hand detection working using this classification</summary></entry><entry><title>Video 4 - Progress Plan</title><link href="https://handmap.github.io/video-4-progress-plan/" rel="alternate" type="text/html" title="Video 4 - Progress Plan" /><published>2017-03-24T00:00:00+08:00</published><updated>2017-03-24T00:00:00+08:00</updated><id>https://handmap.github.io/video-4-progress-plan</id><content type="html" xml:base="https://handmap.github.io/video-4-progress-plan/">&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/VA8v9zCDf1A&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;</content><category term="video" /><summary>Progress plan video 4</summary></entry><entry><title>Measuring size and distance with OpenCV</title><link href="https://handmap.github.io/measuring-size-and-distance-opencv/" rel="alternate" type="text/html" title="Measuring size and distance with OpenCV" /><published>2017-03-19T00:00:00+08:00</published><updated>2017-03-19T00:00:00+08:00</updated><id>https://handmap.github.io/measuring-size-and-distance-opencv</id><content type="html" xml:base="https://handmap.github.io/measuring-size-and-distance-opencv/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Today while trying to bring all the various components I have so far together, I discovered another important aspect I needed to investigate in order for all this work to be worthwhile. Measurement and scale of the data I capture! It’s all well and good to detect a hand in am image and draw lines from the center of the hand, but that information will be pretty useless without accurate measurements of those lines.&lt;/p&gt;
@@ -1586,146 +1586,4 @@ target_link_libraries&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;OpenCV-test &
 
 &lt;p&gt;How to find convexity defects and draw them - &lt;a href=&quot;https://www.youtube.com/watch?v=DEHk-5xbJhU&quot;&gt;https://www.youtube.com/watch?v=DEHk-5xbJhU&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Hand Tracking And Recognition with OpenCV - &lt;a href=&quot;http://sa-cybernetics.github.io/blog/2013/08/12/hand-tracking-and-recognition-with-opencv/&quot;&gt;http://sa-cybernetics.github.io/blog/2013/08/12/hand-tracking-and-recognition-with-opencv/&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="c++" /><category term="convex hull" /><category term="contours" /><summary>I use my newly functioning C++ binding to create a simple convex hull around a detected hand</summary></entry><entry><title>OpenCV 3.x install on macOS Sierra</title><link href="https://handmap.github.io/opencv3-install-on-macos-sierra/" rel="alternate" type="text/html" title="OpenCV 3.x install on macOS Sierra" /><published>2016-09-27T00:00:00+08:00</published><updated>2016-09-27T00:00:00+08:00</updated><id>https://handmap.github.io/opencv3-install-on-macos-sierra</id><content type="html" xml:base="https://handmap.github.io/opencv3-install-on-macos-sierra/">&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;So for the past month and a half I have battled furiously with getting OpenCV 3.x installed on my Macbook Pro that I accidentally upgraded to Sierra on.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#import &amp;lt;QTKit/QTKit.h&amp;gt;&lt;/span&gt;
-        ^
-1 error generated.
-make[2]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;modules/videoio/CMakeFiles/opencv_videoio.dir/src/cap_qtkit.mm.o] Error 1
-make[2]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; Waiting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;unfinished jobs....
-make[1]: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;modules/videoio/CMakeFiles/opencv_videoio.dir/all] Error 2
-make: &lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;all] Error 2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;I’m not alone with troubles as it seems that some of the core video/image access and manipulation libraries are no longer bundled with Xcode 8.0 command line tools. To add insult to injury even if you install version &amp;gt;7.0 command line tools you’ll still have issues on Sierra.&lt;/p&gt;
-
-&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;So the solution has already been implemented for the OpenCV upstream HEAD branch however the changes haven’t quite been merged with the standard repo that brew/science uses to install and build OpenCV. This can be fixed by installing OpenCV with the following arguments&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew tap homebrew/science
-brew install opencv3 --HEAD --with-contrib --with-python3 --with-java
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You can omit the &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-python3&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-java&lt;/code&gt; off the end if you don’t want it installed for Python3.x or java, however there’s no harm having it built. You might just want to make sure you’ve got your Python path registered with Homebrew.&lt;/p&gt;
-
-&lt;p&gt;Below is a list of other arguements that are available if you see fit:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;==&amp;gt; &lt;/span&gt;Options
---32-bit
-	Build 32-bit only
---c++11
-	Build using C++11 mode
---with-contrib
-	Build &lt;span class=&quot;s2&quot;&gt;&quot;extra&quot;&lt;/span&gt; contributed modules
---with-cuda
-	Build with CUDA v7.0+ support
---with-examples
-	Install C and python examples &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sources&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
---with-ffmpeg
-	Build with ffmpeg support
---with-gphoto2
-	Build with gphoto2 support
---with-gstreamer
-	Build with gstreamer support
---with-jasper
-	Build with jasper support
---with-java
-	Build with Java support
---with-libdc1394
-	Build with libdc1394 support
---with-opengl
-	Build with OpenGL support &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;must use --with-qt5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
---with-openni
-	Build with openni support
---with-openni2
-	Build with openni2 support
---with-python3
-	Build with python3 support
---with-qt
-	Build the Qt4 backend to HighGUI
---with-qt5
-	Build the Qt5 backend to HighGUI
---with-quicktime
-	Use QuickTime &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Video I/O instead of QTKit
---with-static
-	Build static libraries
---with-tbb
-	Enable parallel code &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;OpenCV using Intel TBB
---with-vtk
-	Build with vtk support
---without-eigen
-	Build without eigen support
---without-numpy
-	Use a numpy you&lt;span class=&quot;s1&quot;&gt;'ve installed yourself instead of a Homebrew-packaged numpy
---without-opencl
-	Disable GPU code in OpenCV using OpenCL
---without-openexr
-	Build without openexr support
---without-python
-	Build without Python support
---without-test
-	Build without accuracy &amp;amp; performance tests
---HEAD
-	Install HEAD version
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;I would highly recommend installing and symlinking Python2.x and Python3.x with brew instead, as it’ll keep things neat and tidy.&lt;/p&gt;
-
-&lt;p&gt;Once you’ve successfully installed OpenCV 3.x you’ll needed to symlink a couple paths for your Python2.x and Python3.x libraries. This is done with the following commands&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;## Python 2.7&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; /usr/local/opt/opencv3/lib/python2.7/site-packages &amp;gt;&amp;gt; /usr/local/lib/python2.7/site-packages/opencv3.pth
-
-&lt;span class=&quot;c&quot;&gt;## Python 3.5&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; /usr/local/opt/opencv3/lib/python3.5/site-packages &amp;gt;&amp;gt; /usr/local/lib/python3.5/site-packages/opencv3.pth
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Your version of the command above might vary depending on where you local python libraries are installed. Amend as necessary.&lt;/p&gt;
-
-&lt;p&gt;And presto! you should be able to import and check the version of OpenCV from the python command line interpreter&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# nathan at nathan-macbook in ~ [23:51:55]&lt;/span&gt;
-→ python
-
-Python 2.7.12 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default, Jul 31 2016, 15:05:20&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;GCC 4.2.1 Compatible Apple LLVM 8.0.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;clang-800.0.33.1&lt;span class=&quot;o&quot;&gt;)]&lt;/span&gt; on darwin
-Type &lt;span class=&quot;s2&quot;&gt;&quot;help&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;copyright&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;credits&quot;&lt;/span&gt; or &lt;span class=&quot;s2&quot;&gt;&quot;license&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more information.
-
-&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;import cv2
-&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;cv2.__version__
-&lt;span class=&quot;s1&quot;&gt;'3.1.0-dev'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Java is fairly similar and the libraries you’ll be working with can be found at the following location:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/local/opt/opencv3/share/OpenCV/java/opencv-310.jar
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You can include this library and utilize it in a similar fashion to python.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.opencv.core.Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;I am so unbelievably happy I managed to get this working after a painful month or so working out of a virtual machine…&lt;/p&gt;</content><category term="opencv" /><category term="sierra" /><category term="java" /><category term="python" /><summary>I have fought the good fight and feel the need to share the process I followed to fix my issues</summary></entry></feed>
+&lt;p&gt;Hand Tracking And Recognition with OpenCV - &lt;a href=&quot;http://sa-cybernetics.github.io/blog/2013/08/12/hand-tracking-and-recognition-with-opencv/&quot;&gt;http://sa-cybernetics.github.io/blog/2013/08/12/hand-tracking-and-recognition-with-opencv/&lt;/a&gt;&lt;/p&gt;</content><category term="opencv" /><category term="c++" /><category term="convex hull" /><category term="contours" /><summary>I use my newly functioning C++ binding to create a simple convex hull around a detected hand</summary></entry></feed>

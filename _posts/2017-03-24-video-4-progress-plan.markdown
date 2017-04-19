@@ -2,7 +2,7 @@
 layout: post
 title: "Video 4 - Progress Plan"
 date: 2017-03-24
-excerpt: Project plan video 4
+excerpt: Progress plan video 4
 tags:
 - video
 ---
