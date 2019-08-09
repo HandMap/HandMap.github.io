@@ -143,7 +143,7 @@ for ((xA, yA), (xB, yB), color) in zip(refCoords, objCoords, colors):
     cv2.waitKey(0)
 ```
 
-Below is an example of it using a bottle cap (estimated to be about 0.995inches) calculating the distance to the a hand.
+Below is an example of it using a bottle cap (estimated to be about 25 millimeters) calculating the distance to the a hand.
 
 {% capture fig_img %}
 ![Hand measurement large box]({{ site.url }}/images/posts/2017-03-19/hand-measurement-large-box.png)
